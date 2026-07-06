@@ -4,34 +4,49 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Términos y Condiciones — SignalReplicator</title>
+<link rel="icon" href="favicon.ico">
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#080808;color:#F0F0F0;font-family:'Inter',system-ui,sans-serif;line-height:1.7}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,8,.95);border-bottom:1px solid #222;backdrop-filter:blur(12px)}
-.nav-logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.5px;text-decoration:none;color:#F0F0F0}
-.nav-logo span{color:#D4952A}
-.nav-back{color:#888;text-decoration:none;font-size:14px;transition:color .2s}
-.nav-back:hover{color:#D4952A}
-.container{max-width:760px;margin:0 auto;padding:120px 5% 80px}
-h1{font-size:clamp(32px,5vw,56px);font-weight:800;letter-spacing:-2px;margin-bottom:8px}
-.subtitle{color:#888;font-size:14px;margin-bottom:56px;padding-bottom:32px;border-bottom:1px solid #222}
-h2{font-size:20px;font-weight:700;color:#D4952A;margin:40px 0 12px}
-p{color:#888;margin-bottom:16px;font-size:15px}
-ul{color:#888;font-size:15px;padding-left:20px;margin-bottom:16px}
-ul li{margin-bottom:8px}
-a{color:#D4952A;text-decoration:none}
+:root{
+  --bg:#FFFFFF;--ink:#0F1115;--body:#3A414D;--muted:#6B7280;--faint:#9AA0AB;
+  --green:#10B981;--green-d:#059669;--green-bg:#ECFDF5;--green-bd:#A7F3D0;
+  --border:#E6E8EB;--surface:#F7F9FA;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--body);font-family:'Inter',-apple-system,system-ui,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 6%;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.85);border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}
+.nav-logo{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:700;letter-spacing:-.3px;text-decoration:none;color:var(--ink)}
+.nav-logo .mark{width:30px;height:30px;background:var(--green-bg);border:1px solid var(--green-bd);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--green-d);font-size:15px}
+.nav-logo b{color:var(--green);font-weight:700}
+.nav-back{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+.nav-back:hover{color:var(--green)}
+.container{max-width:740px;margin:0 auto;padding:132px 6% 96px}
+h1{font-size:clamp(30px,4.5vw,44px);font-weight:800;letter-spacing:-1.2px;color:var(--ink);margin-bottom:10px;line-height:1.1}
+.subtitle{color:var(--muted);font-size:14px;margin-bottom:48px;padding-bottom:28px;border-bottom:1px solid var(--border)}
+h2{font-size:19px;font-weight:700;color:var(--ink);margin:44px 0 14px;letter-spacing:-.3px;scroll-margin-top:90px}
+p{color:var(--body);margin-bottom:16px;font-size:15.5px}
+strong{color:var(--ink);font-weight:650}
+ul{color:var(--body);font-size:15.5px;padding-left:22px;margin-bottom:16px}
+ul li{margin-bottom:9px}
+ul li::marker{color:var(--green)}
+a{color:var(--green-d);text-decoration:none;font-weight:500}
 a:hover{text-decoration:underline}
-footer{text-align:center;padding:40px;color:#444;font-size:13px;border-top:1px solid #222;margin-top:80px}
+.notice{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--ink);border-radius:10px;padding:16px 18px;margin:22px 0}
+.notice p{margin:0;color:var(--ink);font-size:15px}
+footer{text-align:center;padding:36px 6%;color:var(--faint);font-size:13px;border-top:1px solid var(--border);margin-top:72px}
+footer a{color:var(--muted)}
+footer a:hover{color:var(--green)}
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="signalreplicator_WEB_v2.html" class="nav-logo">
-    <div style="width:36px;height:36px;background:#3D2A0A;border:1px solid #D4952A;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px">⚡</div>
-    Signal<span>Replicator</span>
+  <a href="/" class="nav-logo">
+    <span class="mark">⚡</span>
+    <span>Signal<b>Replicator</b></span>
   </a>
-  <a href="signalreplicator_WEB_v2.html" class="nav-back">← Volver</a>
+  <a href="/" class="nav-back">← Volver</a>
 </nav>
 
 <div class="container">
@@ -50,13 +65,13 @@ footer{text-align:center;padding:40px;color:#444;font-size:13px;border-top:1px s
   </ul>
 
   <h2>3. Suscripción y pagos</h2>
-  <p>Los pagos se gestionan a través de Lemon Squeezy. La suscripción se renueva automáticamente cada mes hasta que la canceles. Puedes cancelar en cualquier momento desde tu panel de Lemon Squeezy y seguirás teniendo acceso hasta el final del período pagado.</p>
+  <p>Los pagos se gestionan a través de nuestro procesador de pagos. La suscripción se renueva automáticamente cada mes hasta que la canceles. Puedes cancelar en cualquier momento desde tu panel de cliente y seguirás teniendo acceso hasta el final del período pagado.</p>
 
   <h2>4. Período de prueba</h2>
   <p>Ofrecemos 7 días de prueba gratuita. Para iniciar la prueba se requiere un método de pago, pero no se realiza ningún cargo durante esos 7 días: si cancelas antes de que termine, no pagarás nada. Al finalizar el período de prueba, la suscripción se activa automáticamente para que puedas seguir usando el software.</p>
 
   <h2>5. Riesgo en el trading</h2>
-  <p><strong>AVISO IMPORTANTE:</strong> El trading con instrumentos financieros implica un riesgo elevado de pérdida de capital. SignalReplicator es una herramienta de automatización y <strong>no constituye asesoramiento financiero</strong>. El usuario es el único responsable de las decisiones de trading y de los resultados obtenidos. SignalReplicator no se hace responsable de pérdidas económicas derivadas del uso del software.</p>
+  <div class="notice"><p><strong>AVISO IMPORTANTE:</strong> El trading con instrumentos financieros implica un riesgo elevado de pérdida de capital. SignalReplicator es una herramienta de automatización y <strong>no constituye asesoramiento financiero</strong>. El usuario es el único responsable de las decisiones de trading y de los resultados obtenidos. SignalReplicator no se hace responsable de pérdidas económicas derivadas del uso del software.</p></div>
 
   <h2>6. Disponibilidad del servicio</h2>
   <p>Nos esforzamos por mantener el software operativo, pero no garantizamos disponibilidad ininterrumpida. No nos hacemos responsables de pérdidas derivadas de interrupciones técnicas, fallos de conexión o incompatibilidades con brokers o versiones de MetaTrader.</p>
@@ -65,7 +80,7 @@ footer{text-align:center;padding:40px;color:#444;font-size:13px;border-top:1px s
   <p>Nos reservamos el derecho de actualizar o modificar el software en cualquier momento. Las actualizaciones importantes se comunicarán por email.</p>
 
   <h2>8. Cancelación y reembolsos</h2>
-  <p>Puedes cancelar tu suscripción en cualquier momento desde tu panel de Lemon Squeezy y seguirás teniendo acceso hasta el final del período pagado. Ofrecemos una garantía de reembolso de 14 días si el software no funciona como se describe por un problema técnico; los resultados de trading no dan derecho a reembolso. Las renovaciones ya facturadas no son reembolsables. Consulta todos los detalles en nuestra <a href="reembolso.html">Política de Reembolso</a>.</p>
+  <p>Puedes cancelar tu suscripción en cualquier momento desde tu panel de cliente y seguirás teniendo acceso hasta el final del período pagado. Ofrecemos una garantía de reembolso de 14 días si el software no funciona como se describe por un problema técnico; los resultados de trading no dan derecho a reembolso. Las renovaciones ya facturadas no son reembolsables. Consulta todos los detalles en nuestra <a href="reembolso.html">Política de Reembolso</a>.</p>
 
   <h2>9. Modificación de los términos</h2>
   <p>Podemos actualizar estos términos en cualquier momento. Te notificaremos por email ante cambios relevantes. El uso continuado del software implica la aceptación de los nuevos términos.</p>
