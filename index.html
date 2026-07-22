@@ -45,6 +45,12 @@ nav.scrolled{background:rgba(255,255,255,.85);border-color:var(--border);backdro
 .lang-btn:hover{border-color:var(--gold);color:var(--gold)}
 .lang-btn.active{background:var(--gold-dim);border-color:var(--gold);color:var(--gold-ll)}
 .footer-lang{display:none}
+.lang-select{display:none}
+/* Acceso: enlace de texto, NO botón. El único botón de la barra es el CTA,
+   que es para visitantes nuevos (el 95%). Es como lo hacen TSC, TelegramFXCopier,
+   SignalsCopier y Copygram: dos botones compitiendo diluyen la conversión. */
+.nav-login{background:none;border:none;color:var(--gray1);padding:0 4px;font-size:14px;font-weight:600;cursor:pointer;transition:color .2s;text-decoration:none;white-space:nowrap}
+.nav-login:hover{color:var(--gold)}
 .nav-cta{background:var(--gold);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:background .2s}
 .nav-cta:hover{background:var(--gold-l)}
 #hero{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:54px;max-width:1180px;margin:0 auto;padding:120px 6% 70px;position:relative;text-align:left}
@@ -194,15 +200,48 @@ footer{padding:60px 5%;border-top:1px solid var(--border);display:flex;justify-c
 .install-warning strong{color:var(--gold)}
 /* ── COMPARE TABLE WRAP ── */
 .compare-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:8px}
+/* ── SECCIÓN CLOUD ── */
+#cloud{padding:120px 5%;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.cloud-sub{text-align:center;max-width:620px;margin:0 auto 46px;color:var(--body);font-size:16px;line-height:1.7}
+.cloud-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;max-width:1000px;margin:0 auto}
+/* Maqueta: muestra ESTADO de conexión, nunca beneficios inventados */
+.cloud-panel{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:22px 24px;box-shadow:0 12px 34px rgba(15,17,21,.07)}
+.cp-bar{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--border);margin-bottom:6px}
+.cp-t{font-size:12.5px;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.cp-live{font-size:11px;color:var(--gold);display:inline-flex;align-items:center;gap:5px;font-weight:600}
+.cp-live i{width:7px;height:7px;border-radius:50%;background:var(--gold);display:inline-block}
+.cp-row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--border);font-size:14.5px;color:var(--body)}
+.cp-row:last-child{border-bottom:none}
+.cp-row b{font-size:13.5px;font-weight:650}
+.cp-row b.ok{color:var(--gold)} .cp-row b.off{color:var(--faint)}
+.cp-foot{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);text-align:center}
+.cloud-list{list-style:none;margin:0;padding:0}
+.cloud-list li{padding:0 0 22px 0}
+.cloud-list li:last-child{padding-bottom:0}
+.cloud-list b{display:block;color:var(--ink);font-size:15.5px;font-weight:700;margin-bottom:5px}
+.cloud-list span{color:var(--body);font-size:14.5px;line-height:1.65}
+.plan.destacado{border-color:var(--gold);box-shadow:0 10px 30px rgba(16,185,129,.1)}
+.cloud-extra{font-size:13px;color:var(--muted);margin:-6px 0 14px;line-height:1.5}
+.cloud-note{text-align:center;color:var(--muted);font-size:13.5px;margin-top:26px}
+@media(max-width:860px){
+  #cloud{padding:90px 6%}
+  .cloud-grid{grid-template-columns:1fr;gap:32px}
+}
+
 /* ── RESPONSIVE 768px ── */
 @media(max-width:768px){
   /* NAV */
   .nav-links{display:none}
-  .lang-selector{display:flex;gap:4px}
-  .lang-btn{padding:4px 7px;font-size:11px;letter-spacing:0}
+  /* 5 botones de idioma no caben en 375px → desplegable compacto */
+  .lang-selector{display:none}
+  .lang-select{display:block;background:transparent;border:1px solid var(--border);color:var(--gray1);padding:5px 4px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer}
   .nav-cta{display:none}
-  .nav-logo{font-size:16px;gap:7px}
-  .nav-logo-icon{width:28px;height:28px;font-size:15px}
+  /* "Acceder" SÍ se mantiene en móvil: entrar a tu cuenta desde el teléfono
+     es justo el caso más habitual. Se compacta todo para que quepa en 375px. */
+  .nav-login{font-size:13px;padding:0 2px}
+  .nav-right{gap:8px}
+  .nav-logo{font-size:15px;gap:6px}
+  .nav-logo-icon{width:26px;height:26px;font-size:14px}
   nav{padding:0 4%}
   /* HERO */
   #hero{grid-template-columns:1fr;gap:34px;min-height:auto;padding:96px 6% 50px}
@@ -287,6 +326,7 @@ footer{padding:60px 5%;border-top:1px solid var(--border);display:flex;justify-c
     <li><a onclick="scrollToId('how')" data-i18n="nav_how">Cómo funciona</a></li>
     <li><a onclick="scrollToId('pricing')" data-i18n="nav_pricing">Precios</a></li>
     <li><a onclick="scrollToId('install')" data-i18n="nav_install">Instalar</a></li>
+    <li><a onclick="scrollToId('cloud')" data-i18n="nav_cloud">Cloud</a></li>
     <li><a onclick="scrollToId('faq')" data-i18n="nav_faq">FAQ</a></li>
   </ul>
   <div class="nav-right">
@@ -297,6 +337,11 @@ footer{padding:60px 5%;border-top:1px solid var(--border);display:flex;justify-c
       <button class="lang-btn" onclick="setLang('de')">DE</button>
       <button class="lang-btn" onclick="setLang('pt')">PT</button>
     </div>
+    <select class="lang-select" aria-label="Idioma" onchange="setLang(this.value)">
+      <option value="es">ES</option><option value="en">EN</option><option value="fr">FR</option>
+      <option value="de">DE</option><option value="pt">PT</option>
+    </select>
+    <a class="nav-login" href="https://app.signalreplicator.com" data-i18n="nav_login">Acceder</a>
     <button class="nav-cta" onclick="scrollToId('pricing')" data-i18n="nav_cta">Empezar gratis</button>
   </div>
 </nav>
@@ -495,6 +540,51 @@ footer{padding:60px 5%;border-top:1px solid var(--border);display:flex;justify-c
   <div class="plan-guarantee" style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:32px;color:var(--gray1);font-size:13px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M12 3l7 3v5c0 4-3 7-7 8-4-1-7-4-7-8V6z"/><path d="M9.3 12l2 2 3.4-3.4"/></svg><span data-i18n="plan_guarantee">Pago seguro · Cancela cuando quieras · Sin permanencia</span></div>
 </section>
 
+<section id="cloud">
+  <p class="section-eyebrow reveal" style="text-align:center" data-i18n="cloud_eyebrow">Nuevo · SignalReplicator Cloud</p>
+  <h2 class="section-title reveal" style="text-align:center;max-width:640px;margin:0 auto 14px" data-i18n="cloud_title">¿Y si no quieres tener<br>el ordenador encendido?</h2>
+  <p class="cloud-sub reveal" data-i18n="cloud_sub">La versión Cloud corre en nuestros servidores, 24 horas al día. Apagas el portátil, cierras la tapa, te vas de viaje — y tus señales se siguen ejecutando.</p>
+
+  <div class="cloud-grid reveal">
+    <!-- Maqueta de la interfaz. Muestra ESTADO, nunca resultados inventados. -->
+    <div class="cloud-panel">
+      <div class="cp-bar"><span class="cp-t">app.signalreplicator.com</span><span class="cp-live"><i></i><span data-i18n="cloud_running">Operando</span></span></div>
+      <div class="cp-rows">
+        <div class="cp-row"><span data-i18n="cloud_r1">Telegram</span><b class="ok" data-i18n="cloud_connected">Conectado</b></div>
+        <div class="cp-row"><span data-i18n="cloud_r2">Bróker</span><b class="ok" data-i18n="cloud_connected">Conectado</b></div>
+        <div class="cp-row"><span data-i18n="cloud_r3">Tu ordenador</span><b class="off" data-i18n="cloud_off">Apagado</b></div>
+      </div>
+      <p class="cp-foot" data-i18n="cloud_panel_foot">Todo sigue funcionando.</p>
+    </div>
+
+    <ul class="cloud-list">
+      <li><b data-i18n="cloud_b1t">Sin instalar nada</b><span data-i18n="cloud_b1">Entras desde el navegador, también desde el móvil. No hay programa que actualizar.</span></li>
+      <li><b data-i18n="cloud_b2t">Nunca se apaga</b><span data-i18n="cloud_b2">Servidores en la Unión Europea, con copias de seguridad diarias y vigilancia continua.</span></li>
+      <li><b data-i18n="cloud_b3t">Tu cuenta sigue siendo tuya</b><span data-i18n="cloud_b3">Conectas tu bróker con un token que puedes revocar cuando quieras. Nunca vemos la contraseña de tu bróker ni tocamos tu dinero.</span></li>
+    </ul>
+  </div>
+
+  <div class="plans reveal" style="max-width:420px;margin:44px auto 0">
+    <div class="plan destacado">
+      <span class="plan-badge" data-i18n="cloud_badge">Cloud · Mensual</span>
+      <h3 class="plan-name">SignalReplicator Cloud</h3>
+      <p class="plan-desc" data-i18n="cloud_plan_desc">Corre en nuestros servidores. Tú no instalas nada.</p>
+      <div class="plan-price"><span class="plan-price-cur">€</span><span class="plan-price-num">25</span><span class="plan-price-per" data-i18n="per_month">/mes</span></div>
+      <p class="cloud-extra" data-i18n="cloud_extra">+ tu cuenta de MetaApi (unos €9/mes, la contratas tú a tu nombre)</p>
+      <p class="plan-trial" data-i18n="trial_text">✓ 7 días gratis · cancela cuando quieras</p>
+      <ul class="plan-features">
+        <li data-i18n="cf1">Todo lo de la versión de escritorio</li>
+        <li data-i18n="cf2">Funciona con el ordenador apagado</li>
+        <li data-i18n="cf3">Panel web y desde el móvil</li>
+        <li data-i18n="cf4">Varios canales a la vez</li>
+        <li data-i18n="cf5">Estadísticas y calendario de resultados</li>
+      </ul>
+      <a href="https://app.signalreplicator.com" class="plan-btn primary" data-i18n="cloud_cta" target="_blank" rel="noopener">Crear mi cuenta</a>
+    </div>
+  </div>
+  <p class="cloud-note" data-i18n="cloud_note">¿Prefieres que corra en tu propio equipo? La versión de escritorio sigue disponible arriba.</p>
+</section>
+
 <section id="compare">
   <h2 class="compare-title reveal" data-i18n="compare_title">¿Por qué SignalReplicator?</h2>
   <div class="compare-table-wrap"><table class="compare-table reveal">
@@ -583,7 +673,7 @@ footer{padding:60px 5%;border-top:1px solid var(--border);display:flex;justify-c
 ═══════════════════════════════════ */
 const T={
   es:{
-    nav_how:'Cómo funciona', nav_pricing:'Precios', nav_install:'Instalar', nav_faq:'FAQ', nav_cta:'Empezar gratis',
+    nav_how:'Cómo funciona', nav_pricing:'Precios', nav_install:'Instalar', nav_faq:'FAQ', nav_cta:'Empezar gratis', nav_cloud:'Cloud', cloud_eyebrow:'Nuevo · SignalReplicator Cloud', cloud_title:'¿Y si no quieres tener<br>el ordenador encendido?', cloud_sub:'La versión Cloud corre en nuestros servidores, 24 horas al día. Apagas el portátil, cierras la tapa, te vas de viaje — y tus señales se siguen ejecutando.', cloud_running:'Operando', cloud_r1:'Telegram', cloud_r2:'Bróker', cloud_r3:'Tu ordenador', cloud_connected:'Conectado', cloud_off:'Apagado', cloud_panel_foot:'Todo sigue funcionando.', cloud_b1t:'Sin instalar nada', cloud_b1:'Entras desde el navegador, también desde el móvil. No hay programa que actualizar.', cloud_b2t:'Nunca se apaga', cloud_b2:'Servidores en la Unión Europea, con copias de seguridad diarias y vigilancia continua.', cloud_b3t:'Tu cuenta sigue siendo tuya', cloud_b3:'Conectas tu bróker con un token que puedes revocar cuando quieras. Nunca vemos la contraseña de tu bróker ni tocamos tu dinero.', cloud_badge:'Cloud · Mensual', cloud_plan_desc:'Corre en nuestros servidores. Tú no instalas nada.', cloud_extra:'+ tu cuenta de MetaApi (unos €9/mes, la contratas tú a tu nombre)', cf1:'Todo lo de la versión de escritorio', cf2:'Funciona con el ordenador apagado', cf3:'Panel web y desde el móvil', cf4:'Varios canales a la vez', cf5:'Estadísticas y calendario de resultados', cloud_cta:'Crear mi cuenta', cloud_note:'¿Prefieres que corra en tu propio equipo? La versión de escritorio sigue disponible arriba.', nav_login:'Acceder',
     hero_eyebrow:'Trading automatizado · Sin código · Sin esfuerzo',
     hero_title:'Tu grupo de Telegram.<br><em>Tu broker.</em><br>Automático.',
     hero_sub:'SignalReplicator lee las señales de tu grupo y las ejecuta en MetaTrader 5 en menos de 20ms. Sin intervención humana.',
@@ -645,7 +735,7 @@ const T={
     pnl_label:'P&L Flotante',
   },
   en:{
-    nav_how:'How it works', nav_pricing:'Pricing', nav_install:'Install', nav_faq:'FAQ', nav_cta:'Start free',
+    nav_how:'How it works', nav_pricing:'Pricing', nav_install:'Install', nav_faq:'FAQ', nav_cta:'Start free', nav_cloud:'Cloud', cloud_eyebrow:'New · SignalReplicator Cloud', cloud_title:"What if you don't want<br>to leave your computer on?", cloud_sub:'The Cloud version runs on our servers, 24 hours a day. Shut your laptop, close the lid, go travelling — your signals keep executing.', cloud_running:'Running', cloud_r1:'Telegram', cloud_r2:'Broker', cloud_r3:'Your computer', cloud_connected:'Connected', cloud_off:'Off', cloud_panel_foot:'Everything keeps working.', cloud_b1t:'Nothing to install', cloud_b1:'Log in from your browser, phone included. No software to update.', cloud_b2t:'Never switches off', cloud_b2:'Servers in the European Union, with daily backups and continuous monitoring.', cloud_b3t:'Your account stays yours', cloud_b3:'You connect your broker with a token you can revoke at any time. We never see your broker password and never touch your money.', cloud_badge:'Cloud · Monthly', cloud_plan_desc:'Runs on our servers. You install nothing.', cloud_extra:'+ your own MetaApi account (about €9/month, in your name)', cf1:'Everything in the desktop version', cf2:'Works with your computer off', cf3:'Web and mobile dashboard', cf4:'Multiple channels at once', cf5:'Statistics and results calendar', cloud_cta:'Create my account', cloud_note:'Prefer it running on your own machine? The desktop version is still available above.', nav_login:'Log in',
     hero_eyebrow:'Automated trading · No code · No effort',
     hero_title:'Your Telegram group.<br><em>Your broker.</em><br>Automated.',
     hero_sub:'SignalReplicator reads signals from your group and executes them in MetaTrader 5 in under 20ms. No human intervention required.',
@@ -707,7 +797,7 @@ const T={
     pnl_label:'Floating P&L',
   },
   fr:{
-    nav_how:'Comment ça marche', nav_pricing:'Tarifs', nav_install:'Installer', nav_faq:'FAQ', nav_cta:'Essai gratuit',
+    nav_how:'Comment ça marche', nav_pricing:'Tarifs', nav_install:'Installer', nav_faq:'FAQ', nav_cta:'Essai gratuit', nav_cloud:'Cloud', cloud_eyebrow:'Nouveau · SignalReplicator Cloud', cloud_title:'Et si vous ne vouliez pas<br>laisser votre ordinateur allumé ?', cloud_sub:"La version Cloud tourne sur nos serveurs, 24 h sur 24. Vous fermez votre portable, vous partez en voyage — vos signaux continuent de s'exécuter.", cloud_running:'En marche', cloud_r1:'Telegram', cloud_r2:'Courtier', cloud_r3:'Votre ordinateur', cloud_connected:'Connecté', cloud_off:'Éteint', cloud_panel_foot:'Tout continue de fonctionner.', cloud_b1t:'Rien à installer', cloud_b1:'Connectez-vous depuis votre navigateur, mobile compris. Aucun logiciel à mettre à jour.', cloud_b2t:"Ne s'éteint jamais", cloud_b2:"Serveurs dans l'Union européenne, sauvegardes quotidiennes et surveillance continue.", cloud_b3t:'Votre compte reste le vôtre', cloud_b3:'Vous connectez votre courtier avec un jeton révocable à tout moment. Nous ne voyons jamais votre mot de passe et ne touchons jamais à votre argent.', cloud_badge:'Cloud · Mensuel', cloud_plan_desc:"Tourne sur nos serveurs. Vous n'installez rien.", cloud_extra:'+ votre compte MetaApi (environ 9 €/mois, à votre nom)', cf1:'Tout ce que propose la version bureau', cf2:'Fonctionne ordinateur éteint', cf3:'Tableau de bord web et mobile', cf4:'Plusieurs canaux à la fois', cf5:'Statistiques et calendrier des résultats', cloud_cta:'Créer mon compte', cloud_note:'Vous préférez sur votre propre machine ? La version bureau reste disponible ci-dessus.', nav_login:'Connexion',
     hero_eyebrow:'Trading automatisé · Sans code · Sans effort',
     hero_title:'Votre groupe Telegram.<br><em>Votre broker.</em><br>Automatisé.',
     hero_sub:'SignalReplicator lit les signaux de votre groupe et les exécute dans MetaTrader 5 en moins de 20ms. Sans intervention humaine.',
@@ -769,7 +859,7 @@ const T={
     pnl_label:'P&L Flottant',
   },
   de:{
-    nav_how:'So funktioniert es', nav_pricing:'Preise', nav_install:'Installieren', nav_faq:'FAQ', nav_cta:'Kostenlos starten',
+    nav_how:'So funktioniert es', nav_pricing:'Preise', nav_install:'Installieren', nav_faq:'FAQ', nav_cta:'Kostenlos starten', nav_cloud:'Cloud', cloud_eyebrow:'Neu · SignalReplicator Cloud', cloud_title:'Und wenn Sie Ihren Rechner<br>nicht anlassen möchten?', cloud_sub:'Die Cloud-Version läuft auf unseren Servern, rund um die Uhr. Laptop zuklappen, verreisen — Ihre Signale werden weiter ausgeführt.', cloud_running:'Läuft', cloud_r1:'Telegram', cloud_r2:'Broker', cloud_r3:'Ihr Rechner', cloud_connected:'Verbunden', cloud_off:'Aus', cloud_panel_foot:'Alles läuft weiter.', cloud_b1t:'Nichts zu installieren', cloud_b1:'Anmeldung über den Browser, auch vom Handy. Keine Software zu aktualisieren.', cloud_b2t:'Schaltet nie ab', cloud_b2:'Server in der Europäischen Union, mit täglichen Backups und laufender Überwachung.', cloud_b3t:'Ihr Konto bleibt Ihres', cloud_b3:'Sie verbinden Ihren Broker mit einem Token, den Sie jederzeit widerrufen können. Wir sehen Ihr Broker-Passwort nie und rühren Ihr Geld nicht an.', cloud_badge:'Cloud · Monatlich', cloud_plan_desc:'Läuft auf unseren Servern. Sie installieren nichts.', cloud_extra:'+ Ihr eigenes MetaApi-Konto (rund 9 €/Monat, auf Ihren Namen)', cf1:'Alles aus der Desktop-Version', cf2:'Funktioniert bei ausgeschaltetem Rechner', cf3:'Web- und Mobil-Dashboard', cf4:'Mehrere Kanäle gleichzeitig', cf5:'Statistiken und Ergebniskalender', cloud_cta:'Konto erstellen', cloud_note:'Lieber auf dem eigenen Rechner? Die Desktop-Version finden Sie oben.', nav_login:'Anmelden',
     hero_eyebrow:'Automatisiertes Trading · Kein Code · Kein Aufwand',
     hero_title:'Deine Telegram-Gruppe.<br><em>Dein Broker.</em><br>Automatisch.',
     hero_sub:'SignalReplicator liest die Signale deiner Gruppe und führt sie in unter 20ms in MetaTrader 5 aus. Ohne menschliches Eingreifen.',
@@ -831,7 +921,7 @@ const T={
     pnl_label:'Schwebender P&L',
   },
   pt:{
-    nav_how:'Como funciona', nav_pricing:'Preços', nav_install:'Instalar', nav_faq:'FAQ', nav_cta:'Começar grátis',
+    nav_how:'Como funciona', nav_pricing:'Preços', nav_install:'Instalar', nav_faq:'FAQ', nav_cta:'Começar grátis', nav_cloud:'Cloud', cloud_eyebrow:'Novo · SignalReplicator Cloud', cloud_title:'E se não quiser deixar<br>o computador ligado?', cloud_sub:'A versão Cloud corre nos nossos servidores, 24 horas por dia. Fecha o portátil, vai viajar — e os seus sinais continuam a ser executados.', cloud_running:'A funcionar', cloud_r1:'Telegram', cloud_r2:'Corretora', cloud_r3:'O seu computador', cloud_connected:'Ligado', cloud_off:'Desligado', cloud_panel_foot:'Tudo continua a funcionar.', cloud_b1t:'Nada para instalar', cloud_b1:'Entra pelo navegador, também do telemóvel. Não há programa para atualizar.', cloud_b2t:'Nunca se desliga', cloud_b2:'Servidores na União Europeia, com cópias de segurança diárias e vigilância contínua.', cloud_b3t:'A sua conta continua sua', cloud_b3:'Liga a sua corretora com um token que pode revogar quando quiser. Nunca vemos a palavra-passe da sua corretora nem tocamos no seu dinheiro.', cloud_badge:'Cloud · Mensal', cloud_plan_desc:'Corre nos nossos servidores. Não instala nada.', cloud_extra:'+ a sua conta MetaApi (cerca de 9 €/mês, em seu nome)', cf1:'Tudo o que tem a versão desktop', cf2:'Funciona com o computador desligado', cf3:'Painel web e no telemóvel', cf4:'Vários canais em simultâneo', cf5:'Estatísticas e calendário de resultados', cloud_cta:'Criar a minha conta', cloud_note:'Prefere que corra no seu próprio equipamento? A versão desktop continua disponível acima.', nav_login:'Entrar',
     hero_eyebrow:'Trading automatizado · Sem código · Sem esforço',
     hero_title:'O seu grupo de Telegram.<br><em>O seu broker.</em><br>Automático.',
     hero_sub:'O SignalReplicator lê os sinais do seu grupo e executa-os no MetaTrader 5 em menos de 20ms. Sem intervenção humana.',
@@ -899,6 +989,7 @@ let currentLang='es'
 function setLang(lang){
   currentLang=lang
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent===lang.toUpperCase()))
+  const _sel=document.querySelector('.lang-select'); if(_sel) _sel.value=lang
   const t=T[lang]
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const k=el.dataset.i18n
