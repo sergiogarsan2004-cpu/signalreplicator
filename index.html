@@ -32,7 +32,35 @@
   <meta name="apple-mobile-web-app-title" content="SignalReplicator"/>
 </head>
 <body>
-  <div id="root"></div>
+  <!-- ═══ PRIMERA PANTALLA, SIN ESPERAR AL JAVASCRIPT ═══
+       Esta web es 100% JavaScript: el HTML sólo traía 268 caracteres de texto, así
+       que hasta que el móvil descargaba, interpretaba y montaba 163 KB de código,
+       el visitante veía una pantalla NEGRA Y VACÍA. Con datos móviles eso son
+       varios segundos de nada, y encima el contenido entra luego con animación.
+       Un visitante con iPhone se fue por esto.
+
+       Lo de abajo se pinta al instante, sin descargar nada, y React lo sustituye
+       por la página real en cuanto monta. También es lo que leen los rastreadores
+       que no ejecutan JavaScript (WhatsApp, Telegram, X).
+
+       La solución de fondo sigue siendo renderizar la web en el servidor; esto es
+       el suelo mínimo para que nadie vea una pantalla en blanco. -->
+  <div id="root">
+    <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px;text-align:center;font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;color:#e8efea;background:#0a0d0c">
+      <div style="font-size:26px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px">
+        Signal<span style="color:#10B981">Replicator</span>
+      </div>
+      <h1 style="font-size:clamp(28px,7vw,44px);line-height:1.15;font-weight:800;letter-spacing:-.03em;margin:18px 0 0;max-width:16ch">
+        Tu grupo de Telegram.<br>Tu bróker.<br><span style="color:#10B981">Automático.</span>
+      </h1>
+      <p style="font-size:clamp(15px,4vw,18px);line-height:1.6;color:#a7b3ab;margin:18px 0 0;max-width:34ch">
+        Las señales de tu grupo de Telegram, ejecutadas solas en MetaTrader 5 en
+        cuanto se publican. Sin programar nada.
+      </p>
+      <p style="font-size:13px;color:#6f7d75;margin:26px 0 0">7 días gratis · cancela cuando quieras</p>
+      <p style="font-size:12px;color:#4d574f;margin:34px 0 0">Cargando…</p>
+    </div>
+  </div>
 
   <!-- Pie legal (obligatorio para una web que cobra) -->
   <footer style="background:#0a0d0c;color:#8a978f;text-align:center;padding:34px 16px;font-family:Inter,system-ui,-apple-system,sans-serif;font-size:13px;line-height:1.7;border-top:1px solid rgba(255,255,255,.06)">
