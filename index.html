@@ -11,21 +11,22 @@
   <!-- Sin cifras de latencia: no son demostrables y dependen de Telegram, del
        proveedor de ejecución y del bróker. Lo comprobable es que cada operación
        guarda la hora de llegada de la señal y la hora del bróker. -->
-  <meta name="description" content="SignalReplicator lee las señales de tu grupo de Telegram y las ejecuta solo en MetaTrader 5, en cuanto llegan y sin que tengas que estar delante. Sin programar nada. 7 días gratis."/>
+  <meta name="description" content="SignalReplicator lee las señales de tu grupo de Telegram y las ejecuta en MetaTrader 5. Sin programar nada. 7 días gratis y sin tarjeta."/>
   <meta property="og:title" content="SignalReplicator · Tu grupo de Telegram, tu broker, automático"/>
-  <meta property="og:description" content="Las señales de tu grupo de Telegram, ejecutadas solas en MetaTrader 5 en cuanto se publican. Sin programar nada. 7 días gratis."/>
+  <meta property="og:description" content="Las señales de tu grupo de Telegram, ejecutadas solas en MetaTrader 5 en cuanto se publican. 7 días gratis y sin tarjeta."/>
   <meta property="og:image" content="/og-image.png"/>
   <meta property="og:type" content="website"/>
   <meta name="twitter:card" content="summary_large_image"/>
 
-  <!-- Fuentes (Google Fonts; en GitHub Pages no hay CSP que las bloquee) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"/>
+  <!-- Fuentes AUTOALOJADAS: se usa la pila del sistema. Antes se cargaban de
+       fonts.googleapis.com, lo que manda la IP de cada visitante a un tercero y en
+       la Unión Europea ha habido multas por ello. -->
 
-  <!-- Diseño de Base44 (build compilado). Enlaces cableados a Whop / dashboard. -->
-  <script type="module" crossorigin="" src="/assets/index-BbBuo76B.js"></script>
-  <link rel="stylesheet" crossorigin="" href="/assets/index-CmItrYDz.css"/>
+  <!-- Build de Base44. Se descarga de su vista previa y se adapta a este dominio:
+       se le quita el favicon que apuntaba a media.base44.com, su script de
+       telemetría (que aquí daría 404) y el título de aplicación "HumanizeWeb". -->
+  <script type="module" crossorigin="" src="/assets/index-Buhv2pmA.js"></script>
+  <link rel="stylesheet" crossorigin="" href="/assets/index-Dw8VagYd.css"/>
 
   <meta name="mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
@@ -33,37 +34,81 @@
 </head>
 <body>
   <!-- ═══ PRIMERA PANTALLA, SIN ESPERAR AL JAVASCRIPT ═══
-       Esta web es 100% JavaScript: el HTML sólo traía 268 caracteres de texto, así
-       que hasta que el móvil descargaba, interpretaba y montaba 163 KB de código,
-       el visitante veía una pantalla NEGRA Y VACÍA. Con datos móviles eso son
-       varios segundos de nada, y encima el contenido entra luego con animación.
-       Un visitante con iPhone se fue por esto.
+       Esta web es 100% JavaScript. Hasta que el móvil descarga, interpreta y monta
+       el código, la pantalla está negra y vacía. Un visitante con iPhone se fue por
+       esto. Y los rastreadores de WhatsApp, Telegram y X no ejecutan JavaScript en
+       absoluto: sólo leen esto.
 
-       Lo de abajo se pinta al instante, sin descargar nada, y React lo sustituye
-       por la página real en cuanto monta. También es lo que leen los rastreadores
-       que no ejecutan JavaScript (WhatsApp, Telegram, X).
-
-       La solución de fondo sigue siendo renderizar la web en el servidor; esto es
-       el suelo mínimo para que nadie vea una pantalla en blanco. -->
+       Lo de abajo se pinta al instante y React lo sustituye por la página real en
+       cuanto monta. Para meter aquí la página ENTERA ya pintada, ver
+       prerenderizar.py — sube el texto visible de unos cientos a más de 5.000
+       caracteres. -->
   <div id="root">
-    <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px;text-align:center;font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;color:#e8efea;background:#0a0d0c">
-      <div style="font-size:26px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px">
+    <div style="max-width:760px;margin:0 auto;padding:56px 22px 40px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:#e8efea;background:#0D0F14;line-height:1.65">
+      <div style="font-size:24px;font-weight:800;letter-spacing:-.02em">
         Signal<span style="color:#10B981">Replicator</span>
       </div>
-      <h1 style="font-size:clamp(28px,7vw,44px);line-height:1.15;font-weight:800;letter-spacing:-.03em;margin:18px 0 0;max-width:16ch">
+
+      <h1 style="font-size:clamp(30px,7vw,46px);line-height:1.12;font-weight:800;letter-spacing:-.03em;margin:26px 0 0">
         Tu grupo de Telegram.<br>Tu bróker.<br><span style="color:#10B981">Automático.</span>
       </h1>
-      <p style="font-size:clamp(15px,4vw,18px);line-height:1.6;color:#a7b3ab;margin:18px 0 0;max-width:34ch">
-        Las señales de tu grupo de Telegram, ejecutadas solas en MetaTrader 5 en
-        cuanto se publican. Sin programar nada.
+      <p style="font-size:clamp(16px,4vw,19px);color:#a7b3ab;margin:18px 0 0">
+        SignalReplicator lee las señales de trading que publican los canales de Telegram
+        que tú elijas y las ejecuta solo en tu cuenta de MetaTrader 5, en cuanto se
+        publican y sin que tengas que estar delante. Sin programar nada.
       </p>
-      <p style="font-size:13px;color:#6f7d75;margin:26px 0 0">7 días gratis · cancela cuando quieras</p>
-      <p style="font-size:12px;color:#4d574f;margin:34px 0 0">Cargando…</p>
+      <p style="font-size:14px;color:#10B981;margin:16px 0 0;font-weight:600">
+        7 días gratis, sin tarjeta · cancela cuando quieras
+      </p>
+
+      <h2 style="font-size:20px;font-weight:700;margin:38px 0 0">Dos formas de usarlo</h2>
+      <p style="color:#a7b3ab;margin:12px 0 0">
+        <b style="color:#e8efea">Cloud — 25 €/mes.</b> Funciona en nuestros servidores 24 horas
+        al día. No instalas nada y no necesitas dejar el ordenador encendido: entras desde el
+        navegador, también desde el móvil. Necesitas tu propia cuenta de MetaApi, que pagas
+        aparte (unos 9 $ al mes).
+      </p>
+      <p style="color:#a7b3ab;margin:12px 0 0">
+        <b style="color:#e8efea">Escritorio — desde 19 €/mes,</b> o 249 € un solo pago de por
+        vida. El programa corre en tu ordenador con Windows y MetaTrader 5 abierto.
+      </p>
+
+      <h2 style="font-size:20px;font-weight:700;margin:38px 0 0">Qué hace</h2>
+      <p style="color:#a7b3ab;margin:12px 0 0">
+        Interpreta el texto de la señal —símbolo, dirección, entrada, stop loss y varios take
+        profits— aunque cada canal lo escriba a su manera, y en cinco idiomas. Después gestiona
+        la operación: break-even automático, trailing stop, cierres parciales y las órdenes de
+        cierre que mande el canal. Cada canal puede tener su propia configuración de riesgo.
+      </p>
+
+      <h2 style="font-size:20px;font-weight:700;margin:38px 0 0">Preguntas frecuentes</h2>
+      <p style="margin:14px 0 0"><b>¿Necesito tarjeta para probar?</b><br>
+        <span style="color:#a7b3ab">No. Ni tarjeta, ni datos de pago. Sólo un correo y una
+        contraseña. Pruebas 7 días completos y decides después.</span></p>
+      <p style="margin:14px 0 0"><b>¿Le doy mis claves del bróker a alguien?</b><br>
+        <span style="color:#a7b3ab">No. Tú contratas tu cuenta de MetaApi y metes ahí las
+        credenciales de tu bróker; nosotros no las vemos. Nos das un permiso que puedes revocar
+        cuando quieras, y que sirve para operar, no para sacar dinero: los brókers mantienen
+        separada la contraseña de retirada.</span></p>
+      <p style="margin:14px 0 0"><b>¿Y mi cuenta de Telegram?</b><br>
+        <span style="color:#a7b3ab">Se conecta como cuando inicias sesión en un móvil nuevo. La
+        sesión sólo lee los canales que elijas: nunca enviamos, respondemos ni publicamos nada
+        desde tu cuenta.</span></p>
+      <p style="margin:14px 0 0"><b>¿Necesito saber programar?</b><br>
+        <span style="color:#a7b3ab">No. Eliges los canales, pones tu tamaño de operación y ya
+        está.</span></p>
+
+      <p style="font-size:13px;color:#6f7d75;margin:34px 0 0">
+        El trading de CFDs conlleva riesgo de pérdida. Las señales las publican terceros y son
+        informativas: SignalReplicator no las genera, no analiza el mercado y no es un asesor
+        financiero.
+      </p>
+      <p style="font-size:12px;color:#4d574f;margin:26px 0 0">Cargando la versión completa…</p>
     </div>
   </div>
 
   <!-- Pie legal (obligatorio para una web que cobra) -->
-  <footer style="background:#0a0d0c;color:#8a978f;text-align:center;padding:34px 16px;font-family:Inter,system-ui,-apple-system,sans-serif;font-size:13px;line-height:1.7;border-top:1px solid rgba(255,255,255,.06)">
+  <footer style="background:#0D0F14;color:#8a978f;text-align:center;padding:34px 16px;font-family:system-ui,-apple-system,sans-serif;font-size:13px;line-height:1.7;border-top:1px solid rgba(255,255,255,.06)">
     <div style="margin-bottom:10px">
       <a href="/terminos.html" style="color:#a7b3ab;text-decoration:none;margin:0 12px">Términos</a>
       <a href="/privacidad.html" style="color:#a7b3ab;text-decoration:none;margin:0 12px">Privacidad</a>
