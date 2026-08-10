@@ -6,7 +6,10 @@
   <title>SignalReplicator · Tu grupo de Telegram, tu broker, automático</title>
 
   <link rel="icon" type="image/png" sizes="180x180" href="/favicon-180.png"/>
-  <link rel="icon" href="/favicon.ico"/>
+  <link rel="icon" href="/favicon.ico" sizes="32x32"/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/favicon-180.png"/>
+  <meta name="theme-color" content="#10B981"/>
 
   <!-- Sin cifras de latencia: no son demostrables y dependen de Telegram, del
        proveedor de ejecución y del bróker. Lo comprobable es que cada operación
@@ -14,7 +17,15 @@
   <meta name="description" content="SignalReplicator lee las señales de tu grupo de Telegram y las ejecuta en MetaTrader 5. Sin programar nada. 7 días gratis y sin tarjeta."/>
   <meta property="og:title" content="SignalReplicator · Tu grupo de Telegram, tu broker, automático"/>
   <meta property="og:description" content="Las señales de tu grupo de Telegram, ejecutadas solas en MetaTrader 5 en cuanto se publican. 7 días gratis y sin tarjeta."/>
-  <meta property="og:image" content="/og-image.png"/>
+  <meta property="og:image" content="https://signalreplicator.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:url" content="https://signalreplicator.com/"/>
+  <meta property="og:site_name" content="SignalReplicator"/>
+  <meta property="og:locale" content="es_ES"/>
+  <meta name="twitter:image" content="https://signalreplicator.com/og-image.png"/>
+  <meta name="twitter:title" content="SignalReplicator · Tu grupo de Telegram, tu bróker, automático"/>
+  <meta name="twitter:description" content="Las señales de tu grupo de Telegram, ejecutadas solas en MetaTrader 5. 7 días gratis y sin tarjeta."/>
   <meta property="og:type" content="website"/>
   <meta name="twitter:card" content="summary_large_image"/>
 
@@ -31,6 +42,24 @@
   <meta name="mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
   <meta name="apple-mobile-web-app-title" content="SignalReplicator"/>
+  <!-- ═══ EL CONTENIDO NACE VISIBLE ═══
+       La web tardaba ~5 s en verse y NO era por la descarga: el HTML llega en
+       161 ms. El problema era que, al montar, React sustituía la primera pantalla
+       estática por su propia versión con style="opacity:0" y la iba revelando con
+       una animación. En un móvil con 4G, el visitante se pasaba varios segundos
+       mirando una pantalla a medias — y alguno se fue por eso.
+
+       Estas dos reglas anulan ese estado inicial invisible. El estilo va EN LÍNEA
+       dentro del elemento, así que la única forma de ganarle es !important.
+       Se pierde la animación de aparición; se gana que la página se vea entera
+       desde el primer instante, que es lo que convierte. -->
+  <style>
+    [style*="opacity: 0"], [style*="opacity:0"] {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  </style>
 </head>
 <body>
   <!-- ═══ PRIMERA PANTALLA, SIN ESPERAR AL JAVASCRIPT ═══
