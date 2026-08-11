@@ -42,22 +42,27 @@
   <meta name="mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
   <meta name="apple-mobile-web-app-title" content="SignalReplicator"/>
-  <!-- ═══ EL CONTENIDO NACE VISIBLE ═══
+  <!-- ═══ LA PRIMERA PANTALLA NACE VISIBLE ═══
        La web tardaba ~5 s en verse y NO era por la descarga: el HTML llega en
        161 ms. El problema era que, al montar, React sustituía la primera pantalla
        estática por su propia versión con style="opacity:0" y la iba revelando con
        una animación. En un móvil con 4G, el visitante se pasaba varios segundos
        mirando una pantalla a medias — y alguno se fue por eso.
 
-       Estas dos reglas anulan ese estado inicial invisible. El estilo va EN LÍNEA
-       dentro del elemento, así que la única forma de ganarle es !important.
-       Se pierde la animación de aparición; se gana que la página se vea entera
-       desde el primer instante, que es lo que convierte. -->
+       Esta regla anula ese estado invisible, pero SOLO en la primera pantalla
+       (#top) y SOLO la opacidad.
+
+       La versión anterior era demasiado bruta: quitaba opacity, transform Y
+       transition a CUALQUIER elemento de la página con opacity:0 en línea. Como
+       las apariciones al bajar (fade y deslizamiento) se hacen justo así, la
+       página entera dejaba de moverse al hacer scroll: todo aparecía ya puesto,
+       de golpe. Se arregló un problema y se apagó la vida del resto.
+
+       El estilo va EN LÍNEA dentro del elemento, así que la única forma de
+       ganarle es !important. -->
   <style>
-    [style*="opacity: 0"], [style*="opacity:0"] {
+    #top [style*="opacity: 0"], #top [style*="opacity:0"] {
       opacity: 1 !important;
-      transform: none !important;
-      transition: none !important;
     }
   </style>
 </head>
