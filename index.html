@@ -4,11 +4,6 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SignalReplicator · Tu grupo de Telegram, tu broker, automático</title>
-
-  <link rel="icon" type="image/png" sizes="180x180" href="/favicon-180.png"/>
-  <link rel="icon" href="/favicon.ico" sizes="32x32"/>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-  <link rel="apple-touch-icon" href="/favicon-180.png"/>
   <meta name="theme-color" content="#10B981"/>
 
   <!-- Sin cifras de latencia: no son demostrables y dependen de Telegram, del
@@ -38,6 +33,23 @@
        telemetría (que aquí daría 404) y el título de aplicación "HumanizeWeb". -->
   <script type="module" crossorigin="" src="/assets/index-Buhv2pmA.js"></script>
   <link rel="stylesheet" crossorigin="" href="/assets/index-Dw8VagYd.css"/>
+
+  
+  <!-- ═══ EL ICONO DEL SITIO ═══
+       Google solo acepta como favicon un CUADRADO cuyo lado sea múltiplo de 48
+       (48, 96, 144, 192…). Antes se declaraba primero uno de 180x180 —que no lo
+       es— y el .ico se anunciaba como "32x32" pese a llevar dentro un 48x48. Por
+       eso en el navegador y en los resultados salía el globo genérico en vez del
+       rayo.
+
+       Se declara primero el SVG (escala a cualquier tamaño) y detrás los PNG con
+       medidas válidas, de mayor a menor. -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png"/>
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png"/>
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png"/>
+  <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png"/>
 
   <meta name="mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
