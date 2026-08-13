@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copiadores de señales de Telegram a MT4/MT5: comparativa honesta (2026) — SignalReplicator</title>
+<meta name="description" content="Comparativa de 11 copiadores de señales de Telegram a MetaTrader: precio real, plataformas y, sobre todo, quién se queda con la contraseña de tu bróker. Datos verificados en agosto de 2026.">
+<link rel="icon" href="favicon.ico">
+<link rel="canonical" href="https://signalreplicator.com/comparativa.html">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FFFFFF;--ink:#0F1115;--body:#3A414D;--muted:#6B7280;--faint:#9AA0AB;
+  --green:#10B981;--green-d:#059669;--green-bg:#ECFDF5;--green-bd:#A7F3D0;
+  --amber-bg:#FFFBEB;--amber-bd:#FDE68A;--amber-d:#B45309;
+  --border:#E6E8EB;--surface:#F7F9FA;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--body);font-family:'Inter',-apple-system,system-ui,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 6%;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.85);border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}
+.nav-logo{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:700;letter-spacing:-.3px;text-decoration:none;color:var(--ink)}
+.nav-logo .mark{width:30px;height:30px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px}
+.nav-logo b{color:var(--green);font-weight:700}
+.nav-back{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+.nav-back:hover{color:var(--green)}
+.container{max-width:920px;margin:0 auto;padding:132px 6% 96px}
+h1{font-size:clamp(30px,4.5vw,44px);font-weight:800;letter-spacing:-1.2px;color:var(--ink);margin-bottom:10px;line-height:1.15}
+.subtitle{color:var(--muted);font-size:14px;margin-bottom:40px;padding-bottom:28px;border-bottom:1px solid var(--border)}
+h2{font-size:22px;font-weight:700;color:var(--ink);margin:52px 0 14px;letter-spacing:-.4px;scroll-margin-top:90px}
+h3{font-size:17px;font-weight:650;color:var(--ink);margin:30px 0 10px}
+p{color:var(--body);margin-bottom:16px;font-size:15.5px}
+strong{color:var(--ink);font-weight:650}
+ul{color:var(--body);font-size:15.5px;padding-left:22px;margin-bottom:16px}
+ul li{margin-bottom:9px}
+ul li::marker{color:var(--green)}
+a{color:var(--green-d);text-decoration:none;font-weight:500}
+a:hover{text-decoration:underline}
+blockquote{border-left:3px solid var(--border);padding:2px 0 2px 18px;margin:20px 0;color:var(--muted);font-style:italic}
+.notice{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--ink);border-radius:10px;padding:16px 18px;margin:24px 0}
+.notice p{margin:0;color:var(--ink);font-size:15px}
+.notice p + p{margin-top:10px}
+/* la tabla se desplaza sola en el movil en vez de romper la pagina */
+.tabla-scroll{overflow-x:auto;margin:24px 0;border:1px solid var(--border);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:680px;font-size:14.5px}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--border)}
+th{background:var(--surface);color:var(--ink);font-weight:650;font-size:13px;letter-spacing:.2px;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.si{color:var(--green-d);font-weight:600}
+td.no{color:var(--amber-d);font-weight:600}
+tr.nuestro{background:var(--green-bg)}
+tr.nuestro td{border-bottom-color:var(--green-bd)}
+.cta{background:var(--green-bg);border:1px solid var(--green-bd);border-radius:14px;padding:26px;margin:44px 0 0;text-align:center}
+.cta h3{margin-top:0}
+.boton{display:inline-block;background:var(--green);color:#fff;padding:13px 26px;border-radius:10px;font-weight:650;font-size:15px;margin-top:8px}
+.boton:hover{background:var(--green-d);text-decoration:none}
+footer{text-align:center;padding:36px 6%;color:var(--faint);font-size:13px;border-top:1px solid var(--border);margin-top:72px}
+footer a{color:var(--muted)}
+footer a:hover{color:var(--green)}
+.fuente{font-size:13px;color:var(--faint);margin-top:-8px;margin-bottom:22px}
+/* letra pequena dentro de las celdas: matices y avisos de "esto no lo hemos comprobado" */
+.apunte{color:var(--muted);font-size:12.5px;font-weight:400;line-height:1.4}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="mark"><svg viewBox="0 0 24 24" fill="currentColor" style="width:17px;height:17px"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12z"/></svg></span>
+    <span>Signal<b>Replicator</b></span>
+  </a>
+  <a href="/" class="nav-back">← Volver</a>
+</nav>
+
+<div class="container">
+
+  <h1>Copiadores de señales de Telegram a MetaTrader: la comparativa que nadie publica</h1>
+  <p class="subtitle">Precios y datos comprobados en agosto de 2026 · 11 productos</p>
+
+  <div class="notice">
+    <p><strong>Esto lo escribimos nosotros, y vendemos uno de los productos de la tabla.</strong> Lo decimos en la primera línea porque casi todas las listas de «los mejores copiadores» están escritas por uno de los que aparecen en ellas, sin avisar, y casualmente se ponen los primeros.</p>
+    <p>Nosotros preferimos decírtelo y que juzgues los datos. Todos los precios de abajo salen de las páginas públicas de cada producto, con fecha. Donde no hemos podido comprobar algo, lo dejamos escrito como «no lo publica» en vez de rellenarlo a ojo.</p>
+  </div>
+
+  <h2>La columna que falta en las demás comparativas</h2>
+
+  <p>Todas las comparativas del sector comparan lo mismo: precio, velocidad y plataformas soportadas. Ninguna compara <strong>quién se queda con la contraseña de tu cuenta de bróker</strong>, que es la decisión con más consecuencias de todas.</p>
+
+  <p>Para operar en tu cuenta de MetaTrader hace falta la contraseña <strong>maestra</strong>, no la de solo lectura. Quien la tiene puede abrir y cerrar operaciones en tu cuenta. No puede sacar tu dinero —las retiradas se piden por el portal del bróker, no por el terminal— pero puede operar todo lo que quiera.</p>
+
+  <p>Una comparativa independiente del sector lo resume así:</p>
+
+  <blockquote>«Todos los copiadores requieren compartir las credenciales de acceso del bróker con servicios de terceros. Los proveedores serios no pueden retirar fondos, pero mantienen acceso a las operaciones de la cuenta.»</blockquote>
+
+  <p>Esa frase es cierta para la mayoría. No lo es para todos, y la diferencia está en cómo está construido cada producto.</p>
+
+  <h2>Las tres formas de conectar con MetaTrader</h2>
+
+  <p>MetaTrader 4 y 5 <strong>no tienen API oficial</strong>. MetaQuotes no ofrece una forma estándar de que un servicio externo opere en tu cuenta. Por eso solo existen tres caminos, y cada uno tiene su peaje:</p>
+
+  <h3>1. Terminales en la nube del proveedor</h3>
+  <p>El servicio ejecuta MetaTrader en sus propios servidores e inicia sesión con <strong>tus credenciales</strong>: usuario, contraseña maestra y servidor. Tu ordenador puede estar apagado. Es la opción más barata, porque atender a un cliente más no le cuesta casi nada al proveedor. A cambio, tus credenciales viven en la infraestructura de una empresa que no conoces.</p>
+
+  <h3>2. A través de MetaApi</h3>
+  <p>MetaApi es una empresa especializada en dar acceso programático a cuentas de MetaTrader. El copiador no habla con tu bróker: habla con MetaApi. Si <strong>la cuenta de MetaApi es tuya</strong>, tú metes ahí tus credenciales y el copiador nunca las ve. Es más caro, porque hay un tercero cobrando por cuenta conectada.</p>
+
+  <h3>3. Un programa en tu propio ordenador</h3>
+  <p>El copiador se instala en tu equipo y opera contra tu MetaTrader local. Nada sale de tu ordenador. A cambio, el equipo tiene que estar encendido, o pagar un VPS.</p>
+
+  <h2>La tabla</h2>
+
+  <div class="tabla-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Plataformas</th>
+        <th>Velocidad</th>
+        <th>¿Lee imágenes?</th>
+        <th>¿Quién guarda tu contraseña?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="nuestro">
+        <td><strong>SignalReplicator Cloud</strong></td>
+        <td>30 € / mes<br><span class="apunte">+ tu cuenta de MetaApi</span></td>
+        <td>MT5</td>
+        <td><strong>195 ms</strong><br><span class="apunte">medido</span></td>
+        <td class="no">No</td>
+        <td class="si">Nadie. La metes tú en MetaApi</td>
+      </tr>
+      <tr class="nuestro">
+        <td><strong>SignalReplicator Escritorio</strong></td>
+        <td>23 € / mes<br>299 € un pago</td>
+        <td>MT5</td>
+        <td><span class="apunte">no medido</span></td>
+        <td class="no">No</td>
+        <td class="si">Nadie. No sale de tu equipo</td>
+      </tr>
+      <tr>
+        <td>AI Signal Copier</td>
+        <td>Gratis · 1 cuenta, 1 canal<br>VIP 15,75 $ / mes</td>
+        <td>MT5</td>
+        <td><span class="apunte">no la publica</span></td>
+        <td><span class="apunte">no lo dice</span></td>
+        <td class="no">No lo publica</td>
+      </tr>
+      <tr>
+        <td>SocialTradeHub</td>
+        <td>16,58 € / mes<br>199 € año</td>
+        <td><strong>8</strong><br><span class="apunte">MT4, MT5, cTrader, TradeLocker, MatchTrader, Binance, Bybit, Kraken</span></td>
+        <td><span class="apunte">no la publica</span></td>
+        <td><span class="apunte">no lo dice</span></td>
+        <td class="no">No lo publica</td>
+      </tr>
+      <tr>
+        <td>MySocialTrader</td>
+        <td>20 $ / mes</td>
+        <td><span class="apunte">«8+» sin detallar</span></td>
+        <td>&lt; 100 ms<br><span class="apunte">declarado</span></td>
+        <td><span class="apunte">no lo dice</span></td>
+        <td class="no">No lo publica</td>
+      </tr>
+      <tr>
+        <td>Copygram</td>
+        <td>25 – 49 $ / mes</td>
+        <td>MT4, MT5, DXTrade, TradeLocker, Binance, Tradovate</td>
+        <td>500 – 1500 ms<br><span class="apunte">según terceros</span></td>
+        <td class="no">No</td>
+        <td class="no">El proveedor</td>
+      </tr>
+      <tr>
+        <td>TSCopier</td>
+        <td>30 $ / mes<br>54 $ Pro</td>
+        <td>MT4, MT5</td>
+        <td>70 ms en Pro<br><span class="apunte">declarado</span></td>
+        <td><span class="apunte">irregular</span></td>
+        <td class="no">El proveedor</td>
+      </tr>
+      <tr>
+        <td>Nexus Copier</td>
+        <td><span class="apunte">no la encontramos</span></td>
+        <td>MT4, MT5<br><span class="apunte">una licencia para ambos</span></td>
+        <td>~50 ms<br><span class="apunte">declarado</span></td>
+        <td class="si">Sí</td>
+        <td class="no">No lo publica</td>
+      </tr>
+      <tr>
+        <td>TTMT</td>
+        <td>39 $ / mes<br>hasta 149 $</td>
+        <td>MT4, MT5</td>
+        <td>0,8 s<br><span class="apunte">declarado</span></td>
+        <td><span class="apunte">no lo dice</span></td>
+        <td class="no">No lo publica</td>
+      </tr>
+      <tr>
+        <td>Trade2Sync <span class="apunte">(antes Telegram Signal Copier)</span></td>
+        <td>39,99 $ / mes<br>399,99 $ un pago</td>
+        <td>MT4, MT5, cTrader, DXtrade, TradeLocker</td>
+        <td>&lt; 50 ms<br><span class="apunte">declarado</span></td>
+        <td><span class="apunte">no lo dice</span></td>
+        <td class="si">Nadie. Es local</td>
+      </tr>
+      <tr>
+        <td>Telegram AI Trader</td>
+        <td><span class="apunte">no la encontramos</span></td>
+        <td>MT5</td>
+        <td><span class="apunte">no la publica</span></td>
+        <td><span class="apunte">no lo dice</span></td>
+        <td class="no">No lo publica</td>
+      </tr>
+      <tr>
+        <td>TelegramFXCopier</td>
+        <td>49,99 $ / mes<br><span class="apunte">+ MetaApi aparte</span></td>
+        <td>MT4, MT5<br><span class="apunte">hasta 100 cuentas</span></td>
+        <td><span class="apunte">no la publica</span></td>
+        <td><span class="apunte">no lo dice</span></td>
+        <td class="si">Nadie</td>
+      </tr>
+      <tr>
+        <td>Telegram Copier</td>
+        <td>99 – 149 € un pago</td>
+        <td>MT4, MT5</td>
+        <td><span class="apunte">no la publica</span></td>
+        <td><span class="apunte">no lo dice</span></td>
+        <td class="si">Nadie. Es local</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p class="fuente">Precios y datos consultados en agosto de 2026 en las páginas públicas de cada producto y en comparativas de terceros. Pueden cambiar sin aviso; comprueba siempre en origen antes de contratar.</p>
+
+  <div class="notice">
+    <p><strong>Sobre la columna de velocidad, leedla con cuidado.</strong> Casi todas las cifras que verás ahí, en esta tabla y en cualquier otra, son las que <em>declara</em> cada empresa en su propia web. Nadie las ha comprobado.</p>
+    <p>La nuestra pone «medido» porque hicimos la prueba y contamos abajo cómo. No la pongas por encima de las demás por eso: significa que sabemos de dónde sale la nuestra, no que hayamos medido las suyas.</p>
+  </div>
+
+  <h2>Si solo te importa el precio</h2>
+
+  <p>Entonces no elijas el nuestro. <strong>SocialTradeHub a 16,58 € al mes con ocho plataformas es más barato y cubre más mercados que nosotros</strong>, y AI Signal Copier tiene un plan gratuito que para un canal y una cuenta puede sobrarte.</p>
+
+  <p>Lo que pagas de más con nosotros son dos cosas concretas: que tus credenciales no pasen por nuestros servidores, y que cada señal y cada ejecución queden con su hora en tu panel para poder discutir con tu proveedor cuando algo no salga. Si eso no te importa, hay opciones mejores y te acabamos de decir cuáles.</p>
+
+  <h2>Lo que aprendimos leyendo las reseñas de los demás</h2>
+
+  <p>Trade2Sync es el mayor del sector: dice tener más de 90.000 usuarios y tiene 475 reseñas en Trustpilot con un 4,5 de media. Pero esa media esconde algo: <strong>un 85 % de cinco estrellas y un 10 % de una</strong>. O encanta o se odia, casi sin término medio.</p>
+
+  <p>Las quejas de una estrella se repiten en tres temas, y merece la pena leerlas antes de elegir cualquier copiador, el nuestro incluido:</p>
+
+  <ul>
+    <li><strong>Lentitud y señales perdidas.</strong> «Very slow execution and misses many signals».</li>
+    <li><strong>Nadie sabe de quién fue la culpa.</strong> «El soporte siempre dice que el problema es del proveedor de señales, no del copiador, y no ayuda a resolver nada».</li>
+    <li><strong>Dificultad para cancelar.</strong> «Intenté cancelar y nadie me dijo cómo, y ahora me siguen cobrando sin usarlo».</li>
+  </ul>
+
+  <p>Y casi todas las reseñas buenas hablan de lo mismo: de <strong>una persona que les ayudó a configurarlo</strong>. Esto no es un mercado donde gane el más barato. Gana el que consigue que el cliente lo monte y pueda comprobar que funciona.</p>
+
+  <h2>Sobre la velocidad, y por qué casi nadie da números</h2>
+
+  <p>Todos los copiadores prometen ser rápidos. Casi ninguno publica una medición.</p>
+
+  <p>Nosotros hicimos una prueba de carga: <strong>500 mensajes en 10 minutos</strong> contra un grupo real. El tiempo entre que la señal aparece en Telegram y la orden queda puesta en el bróker fue de <strong>195 milisegundos de mediana</strong>, con 579 ms en el 5 % peor de los casos.</p>
+
+  <p>No decimos que seamos los más rápidos del mercado: no hemos medido a los demás en las mismas condiciones, y quien afirme lo contrario sin hacerlo te está vendiendo humo. Decimos qué medimos, cómo, y cuándo.</p>
+
+  <h2>Qué no hacemos, para que no te lleves sorpresas</h2>
+
+  <ul>
+    <li><strong>No leemos señales dentro de imágenes.</strong> Si tu canal publica capturas de pantalla en vez de texto, hoy no te servimos. Otros copiadores sí lo hacen.</li>
+    <li><strong>La versión Cloud necesita una cuenta de MetaApi a tu nombre</strong>, que cuesta aparte (unos 10 € al mes según tu uso). Es un paso más al darte de alta. Es también la razón de que nunca veamos tu contraseña.</li>
+    <li><strong>No garantizamos beneficios.</strong> Ejecutamos las señales de tu proveedor tal y como las publica. Si sus señales son malas, las ejecutaremos rápido y perderás dinero rápido.</li>
+  </ul>
+
+  <div class="cta">
+    <h3>Pruébalo con tus propias señales</h3>
+    <p style="margin-bottom:6px">7 días gratis. Sin permanencia, y cancelas desde tu panel cuando quieras.</p>
+    <a href="/" class="boton">Ver SignalReplicator</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>SignalReplicator · <a href="/terminos.html">Términos</a> · <a href="/privacidad.html">Privacidad</a> · <a href="/reembolso.html">Reembolso</a></p>
+  <p style="margin-top:8px">El trading de CFDs conlleva riesgo de pérdida. Las señales son informativas y no constituyen asesoramiento financiero.</p>
+</footer>
+
+</body>
+</html>

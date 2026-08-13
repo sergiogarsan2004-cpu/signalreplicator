@@ -5,6 +5,11 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://signalreplicator.com/comparativa.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
   <url><loc>https://signalreplicator.com/terminos.html</loc></url>
   <url><loc>https://signalreplicator.com/privacidad.html</loc></url>
   <url><loc>https://signalreplicator.com/reembolso.html</loc></url>
