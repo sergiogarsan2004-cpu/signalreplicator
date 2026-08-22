@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>SignalReplicator — demostración de ejecución</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0D0F14; --panel:#141821; --line:#212734;
+  --green:#10B981; --green-dim:#0c7d5a;
+  --txt:#e8efea; --mut:#a7b3ab; --dim:#6f7d75;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+}
+html,body{height:100%}
+body{
+  background:var(--bg); color:var(--txt);
+  font-family:system-ui,-apple-system,'Segoe UI',sans-serif;
+  display:flex; align-items:center; justify-content:center;
+  padding:40px; overflow:hidden;
+}
+.stage{width:100%; max-width:1240px}
+
+/* ---------- cabecera ---------- */
+.top{display:flex; align-items:center; gap:12px; margin-bottom:26px}
+.bolt{
+  width:36px;height:36px;flex:0 0 36px;
+  display:grid;place-items:center;
+  background:var(--green); border-radius:9px;
+  box-shadow:0 0 22px rgba(16,185,129,.45);
+}
+.bolt svg{width:20px;height:20px;display:block}
+.brand{font-size:23px;font-weight:650;letter-spacing:-.3px}
+.brand span{color:var(--green)}
+.badge{
+  margin-left:auto; font-size:11.5px; color:var(--mut);
+  border:1px solid var(--line); border-radius:999px;
+  padding:6px 13px; letter-spacing:.3px;
+}
+.badge b{color:var(--green);font-weight:600}
+
+/* ---------- rejilla ---------- */
+.grid{display:grid; grid-template-columns:1fr 152px 1fr; gap:0; align-items:stretch}
+@media(max-width:900px){.grid{grid-template-columns:1fr; gap:18px}}
+
+.card{
+  background:var(--panel); border:1px solid var(--line);
+  border-radius:16px; padding:24px 26px; min-height:352px;
+  display:flex; flex-direction:column;
+}
+.card.pending{opacity:.32}
+.card.live{border-color:var(--green-dim); box-shadow:0 0 0 1px rgba(16,185,129,.16),0 0 34px rgba(16,185,129,.07)}
+.card{transition:opacity .45s ease, border-color .45s ease, box-shadow .45s ease}
+
+.lbl{
+  font-size:10.5px; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--dim); margin-bottom:5px; font-weight:600;
+}
+.time{font-family:var(--mono); font-size:27px; color:var(--txt); margin-bottom:18px; letter-spacing:-.6px}
+.time em{font-style:normal;color:var(--dim);font-size:18px}
+
+/* ---------- mensaje del canal ---------- */
+.msg{
+  background:#0b0e13; border:1px solid var(--line); border-left:2.5px solid var(--green);
+  border-radius:9px; padding:16px 19px;
+  font-family:var(--mono); font-size:17.5px; line-height:1.85; white-space:pre;
+  color:var(--txt);
+}
+.msg .k{color:var(--green);font-weight:600}
+.from{font-size:12.5px;color:var(--dim);margin-bottom:10px}
+
+/* ---------- centro ---------- */
+.mid{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px}
+.ms{
+  font-family:var(--mono); font-size:54px; font-weight:600;
+  color:var(--green); letter-spacing:-2.5px; line-height:1;
+  text-shadow:0 0 30px rgba(16,185,129,.42);
+}
+.ms small{font-size:20px;letter-spacing:0;margin-left:2px}
+.mslbl{font-size:11.5px;color:var(--dim);letter-spacing:.9px;text-align:center;line-height:1.55}
+.track{width:2px;height:64px;background:var(--line);border-radius:2px;overflow:hidden;position:relative}
+.track i{position:absolute;inset:0 0 auto 0;height:0;background:var(--green);box-shadow:0 0 10px var(--green)}
+@media(max-width:900px){.track{width:52px;height:2px}.track i{inset:0 auto 0 0;width:0;height:100%}}
+
+/* ---------- órdenes ---------- */
+.ord{
+  display:grid; grid-template-columns:1fr auto; gap:4px 10px;
+  padding:12px 0; border-bottom:1px solid var(--line);
+  opacity:0; transform:translateY(7px);
+}
+.ord.in{opacity:1;transform:none;transition:opacity .3s ease,transform .3s ease}
+.ord:last-of-type{border-bottom:0}
+.ord .sym{font-family:var(--mono);font-size:16px;letter-spacing:-.2px}
+.ord .sym b{color:var(--green);font-weight:600}
+.ord .px{font-family:var(--mono);font-size:16px;color:var(--txt);text-align:right}
+.ord .sub{grid-column:1/-1;font-family:var(--mono);font-size:13px;color:var(--dim);letter-spacing:.2px}
+.ord .sub u{text-decoration:none;color:var(--mut)}
+
+.done{
+  margin-top:auto; padding-top:14px;
+  display:flex; align-items:center; gap:8px;
+  font-size:14.5px; color:var(--green); font-weight:600;
+  opacity:0; transition:opacity .4s ease;
+}
+.done.in{opacity:1}
+.done .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 9px var(--green)}
+
+.wait{
+  margin:auto; text-align:center; color:var(--dim); font-size:13px;
+  font-family:var(--mono); letter-spacing:.5px;
+}
+.wait .pulse{
+  display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--dim);margin-right:7px;vertical-align:middle;
+  animation:pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:.25}50%{opacity:1}}
+
+/* ---------- pie ---------- */
+.foot{
+  margin-top:22px; display:flex; gap:8px; flex-wrap:wrap;
+  align-items:center; font-size:11.5px; color:var(--dim);
+}
+.foot .sep{color:var(--line)}
+.foot b{color:var(--mut);font-weight:500}
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <div class="top">
+    <div class="bolt">
+      <svg viewBox="0 0 24 24" fill="#0D0F14"><path d="M13 2L4.5 13.5H11L10 22l8.5-11.5H12L13 2z"/></svg>
+    </div>
+    <div class="brand">Signal<span>Replicator</span></div>
+    <div class="badge">registro real &nbsp;·&nbsp; <b>18 ago 2026</b></div>
+  </div>
+
+  <div class="grid">
+
+    <!-- IZQUIERDA: el mensaje -->
+    <div class="card pending" id="cL">
+      <div class="lbl">Mensaje del canal</div>
+      <div class="time" id="tL">—<em></em></div>
+      <div id="waitL" class="wait"><span class="pulse"></span>esperando señal</div>
+      <div id="msgWrap" style="display:none">
+        <div class="from">canal de señales · Telegram</div>
+        <div class="msg" id="msg"></div>
+      </div>
+    </div>
+
+    <!-- CENTRO: el cronómetro -->
+    <div class="mid">
+      <div class="track"><i id="fill"></i></div>
+      <div class="ms" id="ms">0<small>ms</small></div>
+      <div class="mslbl">del mensaje<br>a la orden</div>
+    </div>
+
+    <!-- DERECHA: las órdenes -->
+    <div class="card pending" id="cR">
+      <div class="lbl">Órdenes en el bróker</div>
+      <div class="time" id="tR">—<em></em></div>
+      <div id="ords"></div>
+      <div class="done" id="done"><span class="dot"></span>4 posiciones abiertas · lote total 0.80</div>
+    </div>
+
+  </div>
+
+  <div class="foot">
+    <b>Datos reales del sistema en producción.</b>
+    <span class="sep">·</span> SL y objetivos idénticos a los publicados por el canal.
+    <span class="sep">·</span> Sin edición.
+  </div>
+
+</div>
+
+<script>
+// ── Datos reales. Señal c1m63549, servidor de producción, 18/08/2026 ──
+const D = {
+  hora:   "11:45:04",
+  msSen:  "130",
+  horaEj: "11:45:04",
+  msEje:  "512",
+  total:  382,                       // ts_ejecutado - ts_senal
+  texto:  "XAUUSD BUY 4387\nTp:4393\nTP:4398\nTP:4403\nTp:4408\nSL:4384",
+  fills:  [4389.32, 4389.32, 4389.32, 4389.31],
+  tps:    [4393, 4398, 4403, 4408],
+  sl:     4384,
+  lote:   "0.20"
+};
+
+const $ = id => document.getElementById(id);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+function pintaMensaje(){
+  $("msg").innerHTML = D.texto
+    .replace(/BUY/g,  '<span class="k">BUY</span>')
+    .replace(/(Tp|TP):/g, '<span class="k">$1:</span>')
+    .replace(/SL:/g,  '<span class="k">SL:</span>');
+}
+
+function filaOrden(i){
+  const d = document.createElement("div");
+  d.className = "ord";
+  d.innerHTML =
+    '<div class="sym"><b>BUY</b> XAUUSD.m &nbsp;' + D.lote + '</div>' +
+    '<div class="px">' + D.fills[i].toFixed(2) + '</div>' +
+    '<div class="sub">SL <u>' + D.sl + '</u> &nbsp;·&nbsp; TP <u>' + D.tps[i] + '</u></div>';
+  return d;
+}
+
+async function contador(ms){
+  const el = $("ms"), bar = $("fill");
+  const t0 = performance.now(), dur = 900;
+  return new Promise(res => {
+    (function paso(){
+      const p = Math.min((performance.now() - t0) / dur, 1);
+      const e = 1 - Math.pow(1 - p, 3);           // frena al final
+      el.innerHTML = Math.round(ms * e) + '<small>ms</small>';
+      bar.style.height = bar.style.width = (e * 100) + '%';
+      p < 1 ? requestAnimationFrame(paso) : res();
+    })();
+  });
+}
+
+async function ciclo(){
+  // reinicio
+  $("cL").className = "card pending";
+  $("cR").className = "card pending";
+  $("tL").innerHTML = "—<em></em>";
+  $("tR").innerHTML = "—<em></em>";
+  $("msgWrap").style.display = "none";
+  $("waitL").style.display = "block";
+  $("ords").innerHTML = "";
+  $("done").className = "done";
+  $("ms").innerHTML = '0<small>ms</small>';
+  $("fill").style.height = $("fill").style.width = "0%";
+
+  await sleep(1500);
+
+  // 1 · llega el mensaje
+  $("cL").className = "card live";
+  $("waitL").style.display = "none";
+  $("msgWrap").style.display = "block";
+  pintaMensaje();
+  $("tL").innerHTML = D.hora + '<em>.' + D.msSen + '</em>';
+
+  await sleep(1100);
+
+  // 2 · el cronómetro
+  await contador(D.total);
+
+  // 3 · las órdenes, una a una
+  $("cR").className = "card live";
+  $("tR").innerHTML = D.horaEj + '<em>.' + D.msEje + '</em>';
+  for (let i = 0; i < 4; i++){
+    const f = filaOrden(i);
+    $("ords").appendChild(f);
+    requestAnimationFrame(() => f.className = "ord in");
+    await sleep(180);
+  }
+
+  await sleep(400);
+  $("done").className = "done in";
+
+  await sleep(6500);            // aguanta el resultado: es el fotograma que vale
+  ciclo();
+}
+
+ciclo();
+</script>
+</body>
+</html>
