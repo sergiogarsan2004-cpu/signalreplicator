@@ -96,8 +96,9 @@
   <!-- ═══ SELECTOR DE IDIOMA ═══
        Va FUERA de #root a propósito. Todo lo que Base44 pinta dentro del root lo
        reemplaza React al montar, y por eso el selector desaparecía cada vez.
-       Aquí no lo toca nadie. -->
-  <div style="position:fixed;top:14px;right:14px;z-index:9999;display:flex;gap:2px;
+       Aquí no lo toca nadie. Va ABAJO a la derecha porque arriba se solapaba
+       con el botón 'Empezar' de la barra de navegación. -->
+  <div style="position:fixed;bottom:16px;right:16px;z-index:9999;display:flex;gap:2px;
               background:rgba(13,15,20,.82);backdrop-filter:blur(8px);
               border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:4px;
               font-family:system-ui,-apple-system,sans-serif;font-size:12px;font-weight:600">
