@@ -93,6 +93,18 @@
        cuanto monta. Para meter aquí la página ENTERA ya pintada, ver
        prerenderizar.py — sube el texto visible de unos cientos a más de 5.000
        caracteres. -->
+  <!-- ═══ SELECTOR DE IDIOMA ═══
+       Va FUERA de #root a propósito. Todo lo que Base44 pinta dentro del root lo
+       reemplaza React al montar, y por eso el selector desaparecía cada vez.
+       Aquí no lo toca nadie. -->
+  <div style="position:fixed;top:14px;right:14px;z-index:9999;display:flex;gap:2px;
+              background:rgba(13,15,20,.82);backdrop-filter:blur(8px);
+              border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:4px;
+              font-family:system-ui,-apple-system,sans-serif;font-size:12px;font-weight:600">
+    <span style="color:#0D0F14;background:#7BE495;border-radius:999px;padding:4px 11px">ES</span>
+    <a href="/en.html" hreflang="en" style="color:#a7b3ab;text-decoration:none;border-radius:999px;padding:4px 11px">EN</a>
+  </div>
+
   <div id="root">
     <div style="max-width:760px;margin:0 auto;padding:56px 22px 40px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:#e8efea;background:#0D0F14;line-height:1.65">
       <div style="font-size:24px;font-weight:800;letter-spacing:-.02em">
@@ -164,6 +176,7 @@
       <a href="/privacidad.html" style="color:#a7b3ab;text-decoration:none;margin:0 12px">Privacidad</a>
       <a href="/reembolso.html" style="color:#a7b3ab;text-decoration:none;margin:0 12px">Reembolso</a>
       <a href="https://app.signalreplicator.com/" style="color:#a7b3ab;text-decoration:none;margin:0 12px">Acceder</a>
+      <a href="/en.html" hreflang="en" style="color:#a7b3ab;text-decoration:none;margin:0 12px">English</a>
     </div>
     <div style="opacity:.7">© 2026 SignalReplicator · Sergio García Santos · El trading de CFDs conlleva riesgo de pérdida. Las señales son informativas y no constituyen asesoramiento financiero.</div>
   </footer>
