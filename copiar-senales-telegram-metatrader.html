@@ -7,6 +7,8 @@
 <meta name="description" content="Las tres formas de copiar las señales de un canal de Telegram a MetaTrader 4 o 5, qué tiene que pasar de verdad para que un mensaje se convierta en una operación, y los cinco fallos que hacen que no se ejecute.">
 <link rel="icon" href="favicon.ico">
 <link rel="canonical" href="https://signalreplicator.com/copiar-senales-telegram-metatrader.html">
+<link rel="alternate" hreflang="es" href="https://signalreplicator.com/copiar-senales-telegram-metatrader.html">
+<link rel="alternate" hreflang="en" href="https://signalreplicator.com/how-to-copy-telegram-signals-to-metatrader.html">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
@@ -48,6 +50,11 @@ th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--border);ve
 th{background:var(--surface);color:var(--ink);font-weight:650;font-size:13px;letter-spacing:.2px;white-space:nowrap}
 tr:last-child td{border-bottom:none}
 .senal{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin:18px 0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;color:var(--ink);line-height:1.7;white-space:pre-wrap}
+.indice{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px 16px 38px;margin:0 0 30px;font-size:15px}
+.indice li{margin-bottom:6px}
+.indice li:last-child{margin-bottom:0}
+.faq{border-top:1px solid var(--border);padding-top:6px;margin-top:6px}
+.faq h3{margin:22px 0 6px}
 .cta{background:var(--green-bg);border:1px solid var(--green-bd);border-radius:14px;padding:26px;margin:44px 0 0;text-align:center}
 .cta h3{margin-top:0}
 .boton{display:inline-block;background:var(--green);color:#fff;padding:13px 26px;border-radius:10px;font-weight:650;font-size:15px;margin-top:8px}
@@ -57,6 +64,70 @@ footer a{color:var(--muted)}
 footer a:hover{color:var(--green)}
 </style>
 <script>!function(w,d,s,u,n,a,b){if(w[n])return;a=w[n]={q:[],t:+new Date,s:[],o:u,track:function(){a.q.push([+new Date].concat([].slice.call(arguments)))},setScope:function(){a.s=[].slice.call(arguments).filter(function(x){return typeof x==="string"});a.q.push([+new Date,"setScope"].concat(a.s))},scope:function(){var c=[].slice.call(arguments);return{track:function(){a.q.push([+new Date].concat([].slice.call(arguments)).concat([{__scope:c}]))}}}};b=d.createElement(s);b.async=1;b.src=u+"/s.js";d.getElementsByTagName(s)[0].parentNode.insertBefore(b,d.getElementsByTagName(s)[0])}(window,document,"script","https://t.whop.tw","whop");whop.setScope("biz_iqmhpJFP93GDsv");whop.track("page");</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "¿Se pueden copiar señales de Telegram a MetaTrader automáticamente?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Sí. Hace falta algo que lea el canal, entienda el mensaje y mande la orden a tu cuenta: o un programa en tu propio ordenador (que tiene que estar encendido), o un servicio en la nube que lo haga por ti. Tú eliges el lote, el riesgo y qué canales sigue."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Necesito tener el ordenador encendido?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Con un asesor experto instalado en tu MetaTrader, sí: si se apaga el equipo o se cae internet, deja de ejecutar. Con un copiador en la nube, no: funciona aunque tengas el móvil en el bolsillo."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Funciona con MetaTrader 4 o solo con MetaTrader 5?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Los dos se pueden. Ojo con un detalle de MT4: al cerrar parte de una posición, el bróker cierra el ticket y abre otro con el volumen que queda. Un copiador que no vuelva a preguntar por el número nuevo pierde de vista esa media posición y deja de gestionarla."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Tengo que dar la contraseña de mi bróker?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Depende del producto, y es la pregunta más importante que puedes hacer. Hay soluciones donde la contraseña nunca sale de tu lado. Otras te piden las credenciales de acceso. Pregúntalo antes de pagar."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Qué pasa si el canal publica la señal en una imagen?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "La mayoría de copiadores no leen imágenes, y los que lo intentan pueden confundir un dígito. Una entrada mal leída es peor que una señal perdida, porque abre una operación con un precio que nadie publicó. Si tu canal publica capturas, compruébalo antes."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Puedo perder dinero aunque esté automatizado?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Sí. Un copiador ejecuta lo que publica tu proveedor de señales; no las mejora ni las filtra. Si las señales son malas, las ejecutará deprisa y perderás deprisa. Automatizar quita el trabajo manual, no el riesgo."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Cuánto cuesta?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "En agosto de 2026, los copiadores del mercado van de 19 a 54 dólares al mes. Si eliges uno que corre en tu propio ordenador, súmale un VPS si no quieres tener el equipo encendido todo el día."
+   }
+  }
+ ]
+}
+</script>
 </head>
 <body>
 
@@ -65,6 +136,7 @@ footer a:hover{color:var(--green)}
             border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:4px;
             font-family:system-ui,-apple-system,sans-serif;font-size:12px;font-weight:600">
   <span style="color:#0D0F14;background:#7BE495;border-radius:999px;padding:4px 11px">ES</span>
+  <a href="/how-to-copy-telegram-signals-to-metatrader.html" hreflang="en" style="color:#a7b3ab;text-decoration:none;border-radius:999px;padding:4px 11px">EN</a>
 </div>
 
 <nav>
@@ -84,11 +156,19 @@ footer a:hover{color:var(--green)}
     <p><strong>Esto lo escribimos nosotros y vendemos uno de los productos del último apartado.</strong> Lo decimos aquí arriba. El resto de la guía sirve igual si al final eliges otro o lo haces a mano.</p>
   </div>
 
+  <ul class="indice">
+    <li><a href="#formas">Las tres formas de hacerlo</a></li>
+    <li><a href="#pasos">Qué pasa entre el mensaje y la orden</a></li>
+    <li><a href="#fallos">Los cinco fallos que hacen que no se ejecute</a></li>
+    <li><a href="#preguntar">Qué preguntar antes de elegir</a></li>
+    <li><a href="#faq">Preguntas frecuentes</a></li>
+  </ul>
+
   <p>Estás en un canal de señales. Publican <em>XAUUSD BUY 4596, stop en 4593, objetivos en 4601, 4606 y 4611</em>. Para que eso acabe siendo una operación en tu cuenta, alguien tiene que leer el mensaje, abrir MetaTrader, calcular el lote, poner el stop y los objetivos y darle a comprar.</p>
 
   <p>Si estás trabajando, en el coche o durmiendo, eso no pasa. Y las señales no esperan: en oro, el precio se mueve 20 pips en menos de un minuto con normalidad.</p>
 
-  <h2>Las tres formas de hacerlo</h2>
+  <h2 id="formas">Las tres formas de hacerlo</h2>
 
   <div class="tabla-scroll">
     <table>
@@ -120,7 +200,7 @@ footer a:hover{color:var(--green)}
 
   <p>No hay una respuesta buena para todos. Si sigues un canal que publica dos señales a la semana en horario europeo y tú estás delante, <strong>hacerlo a mano es gratis y funciona</strong>. Si tu canal publica ocho al día repartidas por la sesión asiática, no hay manera.</p>
 
-  <h2>Qué tiene que pasar entre el mensaje y la orden</h2>
+  <h2 id="pasos">Qué tiene que pasar entre el mensaje y la orden</h2>
 
   <p>Parece un paso. Son seis, y en cada uno se pierden operaciones:</p>
 
@@ -133,7 +213,7 @@ footer a:hover{color:var(--green)}
     <li><strong>Mandarla con el stop puesto desde el primer segundo.</strong> No después.</li>
   </ol>
 
-  <h2>Los cinco fallos que hacen que no se ejecute</h2>
+  <h2 id="fallos">Los cinco fallos que hacen que no se ejecute</h2>
 
   <p>Esto no es teoría. Es lo que rompe de verdad, y conviene que lo sepas elijas lo que elijas.</p>
 
@@ -183,7 +263,7 @@ TP1 • 100 PIPS</div>
 
   <p>Si tu canal publica capturas de pantalla en vez de texto, la mayoría de las herramientas no las leen, y las que lo intentan pueden equivocarse de dígito. Una entrada mal leída es peor que una señal perdida: abre una operación con un precio inventado.</p>
 
-  <h2>Qué preguntar antes de elegir</h2>
+  <h2 id="preguntar">Qué preguntar antes de elegir</h2>
 
   <ul>
     <li><strong>¿Necesita mi ordenador encendido?</strong> Si la respuesta es sí, súmale un VPS al precio.</li>
@@ -193,13 +273,40 @@ TP1 • 100 PIPS</div>
     <li><strong>¿Qué pasa si el bróker no contesta?</strong> La respuesta correcta es que compruebe antes de repetir la orden.</li>
   </ul>
 
-  <h2>Qué usar</h2>
+  <h2 id="usar">Qué usar</h2>
 
   <p>Hemos comparado los <a href="/comparativa.html">11 copiadores de señales de Telegram a MT4 y MT5 que hay en el mercado</a>, con sus precios y sus plataformas, incluido el nuestro y diciendo en qué nos gana cada uno.</p>
 
   <p>Si prefieres el resumen: <strong>SignalReplicator</strong> lee los canales que elijas y ejecuta las señales en tu propia cuenta de MetaTrader, con tu lotaje y tus reglas. Entiende cinco idiomas, entradas por franja y objetivos múltiples, y trae el límite de desvío del punto 1 de esta guía.</p>
 
   <p>Y lo que no hace, para que no te lleves sorpresas: <strong>no lee señales dentro de imágenes</strong>, y <strong>no garantiza beneficios</strong>. Ejecuta lo que publica tu proveedor. Si sus señales son malas, las ejecutará rápido y perderás dinero rápido.</p>
+
+
+  <h2 id="faq">Preguntas frecuentes</h2>
+
+  <div class="faq">
+    <h3>¿Se pueden copiar señales de Telegram a MetaTrader automáticamente?</h3>
+    <p>Sí. Hace falta algo que lea el canal, entienda el mensaje y mande la orden a tu cuenta: o un programa en tu propio ordenador (que tiene que estar encendido), o un servicio en la nube que lo haga por ti. Tú eliges el lote, el riesgo y qué canales sigue.</p>
+
+    <h3>¿Necesito tener el ordenador encendido?</h3>
+    <p>Con un asesor experto instalado en tu MetaTrader, sí: si se apaga el equipo o se cae internet, deja de ejecutar. Con un copiador en la nube, no: funciona aunque tengas el móvil en el bolsillo.</p>
+
+    <h3>¿Funciona con MetaTrader 4 o solo con MetaTrader 5?</h3>
+    <p>Los dos se pueden. Ojo con un detalle de MT4: al cerrar parte de una posición, el bróker cierra el ticket y abre otro con el volumen que queda. Un copiador que no vuelva a preguntar por el número nuevo pierde de vista esa media posición y deja de gestionarla.</p>
+
+    <h3>¿Tengo que dar la contraseña de mi bróker?</h3>
+    <p>Depende del producto, y es la pregunta más importante que puedes hacer. Hay soluciones donde la contraseña nunca sale de tu lado. Otras te piden las credenciales de acceso. Pregúntalo antes de pagar.</p>
+
+    <h3>¿Qué pasa si el canal publica la señal en una imagen?</h3>
+    <p>La mayoría de copiadores no leen imágenes, y los que lo intentan pueden confundir un dígito. Una entrada mal leída es peor que una señal perdida, porque abre una operación con un precio que nadie publicó. Si tu canal publica capturas, compruébalo antes.</p>
+
+    <h3>¿Puedo perder dinero aunque esté automatizado?</h3>
+    <p>Sí. Un copiador ejecuta lo que publica tu proveedor de señales; no las mejora ni las filtra. Si las señales son malas, las ejecutará deprisa y perderás deprisa. Automatizar quita el trabajo manual, no el riesgo.</p>
+
+    <h3>¿Cuánto cuesta?</h3>
+    <p>En agosto de 2026, los copiadores del mercado van de 19 a 54 dólares al mes. Si eliges uno que corre en tu propio ordenador, súmale un VPS si no quieres tener el equipo encendido todo el día.</p>
+
+  </div>
 
   <div class="cta">
     <h3>Pruébalo con tus propias señales</h3>
