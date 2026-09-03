@@ -3,259 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SignalReplicator — Telegram signals, executed on your own MT5</title>
-<meta name="description" content="Reads your Telegram signals channel and places the trade on your own MetaTrader 5. We never see your broker password. Every signal and every execution timestamped. Measured at 195ms median.">
-<link rel="icon" href="favicon.ico">
-<link rel="alternate" hreflang="es" href="https://signalreplicator.com/">
-<link rel="alternate" hreflang="en" href="https://signalreplicator.com/en.html">
-<link rel="canonical" href="https://signalreplicator.com/en.html">
+<title>SignalReplicator — Telegram signals, executed on your own MetaTrader</title>
+
+<!-- Esta página YA NO es una web aparte.
+     Lo era, y ese fue el problema: se escribió a mano antes del rediseño y se
+     quedó atrás mientras la española avanzaba, así que el botón EN llevaba a un
+     sitio distinto, con otro titular, otra estructura y otros precios.
+     Ahora hay UNA sola web y el idioma sólo cambia el texto, así que esta
+     dirección lleva a la portada en inglés. Se mantiene viva porque está
+     enlazada desde partners.html, desde correos ya enviados y desde Google. -->
+<link rel="canonical" href="https://signalreplicator.com/?lang=en">
+<meta name="robots" content="noindex,follow">
+<meta http-equiv="refresh" content="0; url=/?lang=en">
+<script>location.replace("/?lang=en");</script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#0B0D12;--panel:#12151C;--ink:#FFFFFF;--body:#B6BCC6;--muted:#8A919D;--faint:#6B7280;
-  --green:#10B981;--green-d:#059669;--green-l:#6EE7B7;--green-bg:rgba(16,185,129,.10);--green-bd:rgba(16,185,129,.28);
-  --border:rgba(255,255,255,.08);
-}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--body);font-family:'Inter',-apple-system,system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 6%;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(11,13,18,.82);border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}
-.nav-logo{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:700;letter-spacing:-.3px;text-decoration:none;color:var(--ink)}
-.nav-logo .mark{width:30px;height:30px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#0B0D12}
-.nav-logo b{color:var(--green-l);font-weight:700}
-.nav-right{display:flex;align-items:center;gap:22px}
-.nav-right a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500}
-.nav-right a:hover{color:var(--ink)}
-.nav-cta{background:var(--green);color:#0B0D12 !important;padding:9px 18px;border-radius:9px;font-weight:650}
-.nav-cta:hover{background:var(--green-l)}
-.wrap{max-width:1000px;margin:0 auto;padding:0 6%}
-.hero{padding:150px 0 72px}
-.pill{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--border);background:var(--panel);border-radius:999px;padding:7px 16px;font-size:13.5px;color:var(--body);margin-bottom:30px}
-.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block}
-h1{font-size:clamp(34px,6vw,60px);font-weight:800;letter-spacing:-2px;color:var(--ink);line-height:1.05;margin-bottom:22px}
-h1 .g{color:var(--green-l)}
-.lead{font-size:18px;color:var(--body);max-width:640px;margin-bottom:32px}
-.botones{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:14px}
-.b1{background:var(--green);color:#0B0D12;padding:14px 28px;border-radius:11px;font-weight:700;font-size:15.5px;text-decoration:none}
-.b1:hover{background:var(--green-l)}
-.b2{background:transparent;color:var(--ink);border:1px solid var(--border);padding:14px 26px;border-radius:11px;font-weight:600;font-size:15.5px;text-decoration:none}
-.b2:hover{border-color:var(--green-bd)}
-.small{font-size:13.5px;color:var(--faint)}
-section{padding:64px 0;border-top:1px solid var(--border)}
-h2{font-size:clamp(24px,3.4vw,34px);font-weight:750;color:var(--ink);letter-spacing:-1px;margin-bottom:14px;line-height:1.2}
-.sub{color:var(--muted);font-size:16px;margin-bottom:34px;max-width:620px}
-.rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-.tarjeta{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:24px}
-.tarjeta h3{color:var(--ink);font-size:17px;font-weight:650;margin-bottom:8px}
-.tarjeta p{font-size:14.5px;color:var(--body);margin:0}
-.destacada{border-color:var(--green-bd);background:var(--green-bg)}
-.cifra{font-size:40px;font-weight:800;color:var(--green-l);letter-spacing:-1.5px;line-height:1.1;margin-bottom:4px}
-.precio{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:28px}
-.precio .n{font-size:38px;font-weight:800;color:var(--ink);letter-spacing:-1.5px}
-.precio .n span{font-size:16px;font-weight:500;color:var(--muted)}
-.precio ul{list-style:none;margin:18px 0 0;padding:0}
-.precio li{font-size:14.5px;color:var(--body);padding:7px 0 7px 24px;position:relative}
-.precio li::before{content:"";position:absolute;left:0;top:14px;width:12px;height:2px;background:var(--green);border-radius:2px}
-.aviso{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:12px;padding:18px 20px;margin:26px 0}
-.aviso p{margin:0;font-size:15px;color:var(--body)}
-.aviso p+p{margin-top:10px}
-.aviso strong{color:var(--ink)}
-details{border-bottom:1px solid var(--border);padding:16px 0}
-summary{cursor:pointer;color:var(--ink);font-weight:600;font-size:15.5px;list-style:none}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";float:right;color:var(--green);font-weight:700}
-details[open] summary::after{content:"−"}
-details p{margin:12px 0 0;font-size:15px;color:var(--body)}
-strong{color:var(--ink);font-weight:650}
-a{color:var(--green-l)}
-.final{text-align:center;padding:76px 0}
-footer{border-top:1px solid var(--border);padding:34px 6%;text-align:center;color:var(--faint);font-size:13px}
-footer a{color:var(--muted);text-decoration:none;margin:0 7px}
-footer a:hover{color:var(--green-l)}
+  body{background:#0B0D12;color:#B6BCC6;font-family:system-ui,-apple-system,sans-serif;
+       display:flex;align-items:center;justify-content:center;height:100vh;margin:0;text-align:center}
+  a{color:#6EE7B7}
 </style>
-<script>!function(w,d,s,u,n,a,b){if(w[n])return;a=w[n]={q:[],t:+new Date,s:[],o:u,track:function(){a.q.push([+new Date].concat([].slice.call(arguments)))},setScope:function(){a.s=[].slice.call(arguments).filter(function(x){return typeof x==="string"});a.q.push([+new Date,"setScope"].concat(a.s))},scope:function(){var c=[].slice.call(arguments);return{track:function(){a.q.push([+new Date].concat([].slice.call(arguments)).concat([{__scope:c}]))}}}};b=d.createElement(s);b.async=1;b.src=u+"/s.js";d.getElementsByTagName(s)[0].parentNode.insertBefore(b,d.getElementsByTagName(s)[0])}(window,document,"script","https://t.whop.tw","whop");whop.setScope("biz_iqmhpJFP93GDsv");whop.track("page");</script>
 </head>
 <body>
-<!-- Selector de idioma, igual que en el resto. Apunta a su pareja española. -->
-<div style="position:fixed;bottom:16px;right:16px;z-index:9999;display:flex;gap:2px;
-            background:rgba(13,15,20,.82);backdrop-filter:blur(8px);
-            border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:4px;
-            font-family:system-ui,-apple-system,sans-serif;font-size:12px;font-weight:600">
-  <a href="/" hreflang="es" style="color:#a7b3ab;text-decoration:none;border-radius:999px;padding:4px 11px">ES</a>
-  <span style="color:#0D0F14;background:#7BE495;border-radius:999px;padding:4px 11px">EN</span>
-</div>
-
-
-<nav>
-  <a href="/en.html" class="nav-logo">
-    <span class="mark"><svg viewBox="0 0 24 24" fill="currentColor" style="width:17px;height:17px"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12z"/></svg></span>
-    <span>Signal<b>Replicator</b></span>
-  </a>
-  <div class="nav-right">
-    <a href="/downloads.html" style="color:#10B981;text-decoration:none;margin:0 12px;font-weight:600">Download</a>
-      <a href="/how-to-copy-telegram-signals-to-metatrader.html">How it works</a>
-    <a href="/comparison.html">Comparison</a>
-    <a href="/partners.html">For channel owners</a>
-    <a href="/">Español</a>
-    <a href="https://app.signalreplicator.com" class="nav-cta">Start free</a>
-  </div>
-</nav>
-
-<div class="wrap">
-
-  <div class="hero">
-    <div class="pill"><span class="dot"></span> Telegram → MetaTrader 5 · no code</div>
-    <h1>Your signals channel.<br>Your broker.<br><span class="g">Without handing over your password.</span></h1>
-    <p class="lead">SignalReplicator reads the signals in your Telegram channel and places the trade on your own MetaTrader 5 — entry, stop loss, every take profit, partial closes as they hit.</p>
-    <div class="botones">
-      <a href="https://app.signalreplicator.com" class="b1">Try the Cloud free for 7 days</a>
-      <a href="/comparison.html" class="b2">Compare us with the rest</a>
-    </div>
-    <p class="small">7 days free · cancel whenever you want</p>
-  </div>
-
-  <section>
-    <h2>Almost every copier asks for your broker login. We don't.</h2>
-    <p class="sub">To place a trade on a MetaTrader account you need the master password. Most cloud copiers are cheaper because they run MetaTrader on their own servers using your credentials — so those credentials live on a company's infrastructure you know nothing about.</p>
-
-    <div class="rejilla">
-      <div class="tarjeta destacada">
-        <h3>We never see it</h3>
-        <p>You put your broker details into your own MetaApi account, in your name. We talk to MetaApi, not to your broker. There is nothing for us to leak, because we don't hold it.</p>
-      </div>
-      <div class="tarjeta">
-        <h3>You can cut us off</h3>
-        <p>You connect us with a token you can revoke whenever you want, from your own account. We never touch your money — withdrawals go through your broker, never through a terminal.</p>
-      </div>
-      <div class="tarjeta">
-        <h3>Or keep it entirely local</h3>
-        <p>The desktop version runs on your own machine against your own MetaTrader 5. In that setup nothing leaves your computer at all.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>When a trade goes wrong, you can prove whose fault it was</h2>
-    <p class="sub">The most common complaint about copiers is that support blames the signal provider and the provider blames the copier, while you sit in the middle with no evidence.</p>
-
-    <div class="rejilla">
-      <div class="tarjeta">
-        <h3>Every signal, timestamped</h3>
-        <p>The moment the message appeared in your channel, and the moment the order reached your broker. Both are in your panel, for every single trade.</p>
-      </div>
-      <div class="tarjeta destacada">
-        <div class="cifra">195 ms</div>
-        <p>Median time from signal to order placed, measured over 500 messages in 10 minutes. 579 ms in the worst 5%.</p>
-      </div>
-      <div class="tarjeta">
-        <h3>We measured ours. Not theirs.</h3>
-        <p>Most speed claims in this industry are numbers a company wrote on its own website. We're telling you how we got ours, and we haven't tested anyone else's.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Two ways to run it</h2>
-    <p class="sub">The Cloud runs on our servers in the European Union, so your computer can be off. The desktop version runs on your own machine.</p>
-
-    <div class="rejilla">
-      <div class="precio destacada">
-        <p class="small" style="margin-bottom:6px">CLOUD · nothing to install</p>
-        <div class="n">€30 <span>/ month</span></div>
-        <p class="small" style="margin-top:6px">or €300 / year · VAT included</p>
-        <ul>
-          <li>Works with your computer switched off</li>
-          <li>Web panel, and from your phone</li>
-          <li>Several channels at once, each with its own settings</li>
-          <li>Daily encrypted backups, EU servers</li>
-          <li>Pause, resume, check open trades and change lot size with Telegram commands</li>
-        </ul>
-      </div>
-      <div class="precio">
-        <p class="small" style="margin-bottom:6px">DESKTOP · runs on your PC</p>
-        <div class="n">€23 <span>/ month</span></div>
-        <p class="small" style="margin-top:6px">€15/month billed yearly · or €299 once, forever</p>
-        <ul>
-          <li>1 Telegram group</li>
-          <li>Any MT5 broker</li>
-          <li>Parser in Spanish, English, French, German and Portuguese</li>
-          <li>Email support</li>
-          <li>1 device · Windows (on Mac, use the Cloud from your browser)</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="aviso">
-      <p><strong>The Cloud needs a MetaApi account in your own name</strong> — roughly $10 a month, about €8, depending on your usage, on top of the subscription. You set it up yourself, it takes a few minutes.</p>
-      <p>We'd rather tell you here than after you've paid. It is also exactly why we never see your broker password: you give it to MetaApi, not to us. Copiers that skip this step are cheaper because they keep your credentials instead.</p>
-    </div>
-  </section>
-
-  <section>
-    <h2>What we don't do</h2>
-    <p class="sub">Written down before you pay, not discovered afterwards.</p>
-    <div class="rejilla">
-      <div class="tarjeta">
-        <h3>MT4 only on Cloud</h3>
-        <p>Our Cloud plan runs MetaTrader 4 and 5. The desktop app is MetaTrader 5 only — if your account is MT4, you need Cloud.</p>
-      </div>
-      <div class="tarjeta">
-        <h3>No signals inside images</h3>
-        <p>We read text. If your channel posts screenshots instead of written calls, this won't work for you.</p>
-      </div>
-      <div class="tarjeta">
-        <h3>No promises about profit</h3>
-        <p>We execute your provider's signals exactly as published. If a call is bad, we'll place it faster. The quality of the signals is not ours to control.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Questions people actually ask</h2>
-
-    <details><summary>Do I have to give anyone my broker password?</summary>
-      <p>No. You create your own MetaApi account and enter your broker details there, in your name. We connect through MetaApi with a token you can revoke at any time. We never hold your broker credentials, and we never touch your funds.</p></details>
-
-    <details><summary>What about my Telegram account?</summary>
-      <p>You log in with your own Telegram account and pick which channels to copy. Our access is read-only by design: we read the messages in the channels you choose. We don't post, we don't message anyone, and we don't touch your contacts.</p></details>
-
-    <details><summary>What if my channel posts signals in an odd format?</summary>
-      <p>The parser handles the usual formats in Spanish, English, French, German and Portuguese, including partial closes, stop-loss moves and edited messages. If your channel posts something it can't read, send it to us — that's how the parser gets better.</p></details>
-
-    <details><summary>Do I have to leave my computer on?</summary>
-      <p>Not with the Cloud. It runs on our servers, so you can close the laptop and go away. The desktop version does need your machine on with MetaTrader 5 open.</p></details>
-
-    <details><summary>Can I pause it from my phone?</summary>
-      <p>Yes. With Telegram commands you can pause, resume, see your open trades and change your lot size from anywhere.</p></details>
-
-    <details><summary>Do I need a card to try it?</summary>
-      <p>Yes. You enter your card when you start, but nothing is charged during the 7 days. Cancel before they end and you pay nothing.</p></details>
-
-    <details><summary>What happens if your server goes down?</summary>
-      <p>We publish our uptime and incidents at <a href="https://status.signalreplicator.com">status.signalreplicator.com</a>, so you don't have to take our word for it.</p></details>
-  </section>
-
-  <div class="final">
-    <h2>Your next trade is already placed.</h2>
-    <p class="sub" style="margin:0 auto 26px">7 days free. Cancel whenever you like, no lock-in.</p>
-    <a href="https://app.signalreplicator.com" class="b1">Start now — free</a>
-    <p class="small" style="margin-top:14px">Works with any MT5 broker</p>
-  </div>
-
-</div>
-
-<footer>
-  <p>
-    <a href="/">Español</a> ·
-    <a href="/how-to-copy-telegram-signals-to-metatrader.html">How to copy signals</a> ·
-    <a href="/comparison.html">Comparison</a> ·
-    <a href="/partners.html">For channel owners</a> ·
-    <a href="/terms.html">Terms</a> ·
-    <a href="/privacy.html">Privacy</a> ·
-    <a href="/refunds.html">Refunds</a>
-  </p>
-  <p style="margin-top:10px">© 2026 SignalReplicator · CFD trading carries a risk of loss. Signals are informational and do not constitute financial advice.</p>
-</footer>
-
+  <p>Taking you to SignalReplicator in English…<br>
+     <a href="/?lang=en">Continue</a></p>
 </body>
 </html>
