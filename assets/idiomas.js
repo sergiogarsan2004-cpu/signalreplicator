@@ -197,9 +197,23 @@
       var v = Object.prototype.hasOwnProperty.call(CORRECCIONES, limpio) ? CORRECCIONES[limpio] : limpio;
       // 2) traducción, si toca
       if (dic && Object.prototype.hasOwnProperty.call(dic, v)) v = dic[v];
-      if (v !== limpio) cambios.push([n, t.replace(limpio, v)]);
+      if (v !== limpio) cambios.push([n, t.replace(limpio, v), v === ""]);
     }
-    for (var i = 0; i < cambios.length; i++) cambios[i][0].nodeValue = cambios[i][1];
+    for (var i = 0; i < cambios.length; i++) {
+      var nd = cambios[i][0];
+      nd.nodeValue = cambios[i][1];
+      // Si la corrección deja el texto vacío (un nombre de bróker que se quita),
+      // se esconde también su elemento y el separador «·» que lo acompañaba:
+      // si no, quedan puntos sueltos en fila sin nada entre ellos.
+      if (cambios[i][2] && nd.parentElement) {
+        var el = nd.parentElement;
+        el.style.display = "none";
+        var sig = el.nextElementSibling;
+        if (sig && (sig.textContent || "").trim() === "\u00b7") sig.style.display = "none";
+        var ant = el.previousElementSibling;
+        if (ant && (ant.textContent || "").trim() === "\u00b7") ant.style.display = "none";
+      }
+    }
   }
 
   function pintar() {

@@ -87,17 +87,6 @@
 <script>!function(w,d,s,u,n,a,b){if(w[n])return;a=w[n]={q:[],t:+new Date,s:[],o:u,track:function(){a.q.push([+new Date].concat([].slice.call(arguments)))},setScope:function(){a.s=[].slice.call(arguments).filter(function(x){return typeof x==="string"});a.q.push([+new Date,"setScope"].concat(a.s))},scope:function(){var c=[].slice.call(arguments);return{track:function(){a.q.push([+new Date].concat([].slice.call(arguments)).concat([{__scope:c}]))}}}};b=d.createElement(s);b.async=1;b.src=u+"/s.js";d.getElementsByTagName(s)[0].parentNode.insertBefore(b,d.getElementsByTagName(s)[0])}(window,document,"script","https://t.whop.tw","whop");whop.setScope("biz_iqmhpJFP93GDsv");whop.track("page");</script>
 </head>
 <body>
-<!-- Selector de idioma. En index.html va FUERA de #root a proposito: React
-     reemplaza ese arbol al montar y por eso el selector desaparecia en cada
-     build de Base44. Cada pagina apunta a SU pareja, no siempre a la portada. -->
-<div style="position:fixed;bottom:16px;right:16px;z-index:9999;display:flex;gap:2px;
-            background:rgba(13,15,20,.82);backdrop-filter:blur(8px);
-            border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:4px;
-            font-family:system-ui,-apple-system,sans-serif;font-size:12px;font-weight:600">
-  <button type="button" onclick="srCambiarIdioma('es')" id="sr-es" style="color:#0D0F14;background:#7BE495;border:0;cursor:pointer;font:inherit;border-radius:999px;padding:4px 11px">ES</button>
-  <button type="button" onclick="srCambiarIdioma('en')" style="color:#a7b3ab;background:none;border:0;cursor:pointer;font:inherit;border-radius:999px;padding:4px 11px">EN</button>
-</div>
-
   <!-- ═══ PRIMERA PANTALLA, SIN ESPERAR AL JAVASCRIPT ═══
        Esta web es 100% JavaScript. Hasta que el móvil descarga, interpreta y monta
        el código, la pantalla está negra y vacía. Un visitante con iPhone se fue por
