@@ -4,52 +4,83 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>¿Cuánto te cuesta entrar tarde a una señal? — Calculadora | SignalReplicator</title>
-<meta name="description" content="Calcula lo que te cuesta entrar a una señal a peor precio del que publicó el canal. Con el tamaño de contrato real de cada instrumento. Sin registro.">
+<meta name="description" content="Pon la hora a la que tu canal publicó la señal y te decimos el precio real que había y el que había un minuto después. Con datos de mercado, sin registro.">
 <link rel="icon" href="favicon.ico">
 <link rel="canonical" href="https://signalreplicator.com/calculadora.html">
-<link rel="alternate" hreflang="es" href="https://signalreplicator.com/calculadora.html">
 
-<!-- Por qué existe esta página: el visitante no compra porque le expliquen que la
-     herramienta es rápida. Compra cuando ve, con SUS números, lo que le cuesta el
-     problema que ya tiene. Aquí no se promete ninguna ganancia: se calcula un COSTE,
-     que es una resta y la puede comprobar él mismo. -->
+<!-- Por qué esta página está hecha así:
+     El visitante no compra porque le expliquen que la herramienta es rápida. Compra
+     cuando ve, con SUS números, lo que le cuesta el problema que ya tiene.
+     Por eso: NADA que escribir, cero jerga y el número ocupando media pantalla.
+     Tres botones y tres barras. Lo técnico —tamaño de contrato, la fórmula— vive
+     escondido al final, para quien quiera comprobarlo.
+     Y calcula un COSTE, que es una resta comprobable, nunca una ganancia. -->
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0B0D12;--panel:#12151C;--ink:#fff;--body:#B6BCC6;--muted:#8A919D;--faint:#6B7280;
-      --green:#10B981;--green-l:#6EE7B7;--green-bg:rgba(16,185,129,.10);--green-bd:rgba(16,185,129,.28);
+      --green:#10B981;--green-l:#6EE7B7;--green-bg:rgba(16,185,129,.08);--green-bd:rgba(16,185,129,.30);
       --red:#F87171;--border:rgba(255,255,255,.08)}
-body{background:var(--bg);color:var(--body);font-family:'Inter',-apple-system,system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
-.wrap{max-width:760px;margin:0 auto;padding:0 6%}
-nav{padding:18px 6%;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:700;color:var(--ink);text-decoration:none}
-.logo .mark{width:30px;height:30px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#0B0D12}
+body{background:var(--bg);color:var(--body);font-family:'Inter',-apple-system,system-ui,sans-serif;
+     line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:640px;margin:0 auto;padding:0 22px}
+nav{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;color:var(--ink);text-decoration:none}
+.logo .mark{width:28px;height:28px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#0B0D12}
 .logo b{color:var(--green-l)}
 nav a.volver{color:var(--muted);text-decoration:none;font-size:14px}
-h1{font-size:clamp(28px,5vw,42px);font-weight:800;letter-spacing:-1.5px;color:var(--ink);line-height:1.12;margin:54px 0 16px}
+
+h1{font-size:clamp(27px,6.5vw,40px);font-weight:800;letter-spacing:-1.4px;color:var(--ink);
+   line-height:1.14;margin:46px 0 12px;text-align:center}
 h1 .g{color:var(--green-l)}
-.lead{font-size:17px;margin-bottom:34px}
-.caja{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:26px;margin-bottom:20px}
-label{display:block;font-size:13.5px;color:var(--muted);margin-bottom:7px;font-weight:500}
-input,select{width:100%;background:#0B0D12;border:1px solid var(--border);border-radius:10px;
-  padding:13px 14px;color:var(--ink);font-size:16px;font-family:inherit;margin-bottom:18px}
-input:focus,select:focus{outline:none;border-color:var(--green-bd)}
-.fila{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:560px){.fila{grid-template-columns:1fr}}
-.resultado{background:var(--green-bg);border:1px solid var(--green-bd);border-radius:16px;padding:26px;margin-bottom:20px}
-.cifra{font-size:clamp(34px,8vw,52px);font-weight:800;color:var(--red);letter-spacing:-2px;line-height:1.05}
-.cifra.mes{color:var(--red)}
-.pie-cifra{font-size:14px;color:var(--muted);margin-top:4px}
-.sep{height:1px;background:var(--border);margin:20px 0}
-.explica{font-size:14.5px;color:var(--body)}
-.explica strong{color:var(--ink)}
-h2{font-size:22px;font-weight:700;color:var(--ink);margin:44px 0 12px;letter-spacing:-.5px}
-p{margin-bottom:14px}
-.cta{background:var(--panel);border:1px solid var(--green-bd);border-radius:16px;padding:28px;margin:36px 0 60px;text-align:center}
-.b1{display:inline-block;background:var(--green);color:#0B0D12;padding:14px 28px;border-radius:11px;font-weight:700;text-decoration:none;margin-top:8px}
+.lead{font-size:16px;text-align:center;margin-bottom:34px;color:var(--muted)}
+
+/* ── el número, lo primero que se ve ── */
+.marcador{background:var(--panel);border:1px solid var(--green-bd);border-radius:20px;
+          padding:30px 24px;text-align:center;margin-bottom:26px}
+.euros{font-size:clamp(46px,15vw,78px);font-weight:900;color:var(--red);letter-spacing:-3px;line-height:1}
+.al-mes{font-size:15px;color:var(--muted);margin-top:8px}
+.linea{height:1px;background:var(--border);margin:20px 0}
+.por-op{font-size:15px;color:var(--body)}
+.por-op b{color:var(--ink);font-weight:700}
+
+/* ── controles ── */
+.grupo{margin-bottom:30px}
+.titulo{font-size:15px;color:var(--ink);font-weight:600;margin-bottom:12px}
+.opciones{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.op{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 8px;
+    text-align:center;cursor:pointer;user-select:none;transition:border-color .15s,background .15s}
+.op:hover{border-color:var(--green-bd)}
+.op.on{border-color:var(--green);background:var(--green-bg)}
+.op .emo{font-size:26px;display:block;margin-bottom:5px;line-height:1}
+.op .nom{font-size:14px;color:var(--ink);font-weight:600}
+
+.valor{float:right;color:var(--green-l);font-weight:700}
+input[type=datetime-local]{width:100%;background:#0B0D12;border:1px solid var(--border);border-radius:12px;padding:14px;color:var(--ink);font-size:16px;font-family:inherit;color-scheme:dark}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:99px;
+  background:linear-gradient(90deg,var(--green) var(--pct,50%),rgba(255,255,255,.10) var(--pct,50%));outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;
+  background:#fff;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.5)}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radius:50%;background:#fff;cursor:pointer}
+.extremos{display:flex;justify-content:space-between;font-size:12.5px;color:var(--faint);margin-top:6px}
+
+.cta{background:var(--panel);border:1px solid var(--green-bd);border-radius:18px;padding:28px 24px;
+     margin:40px 0 30px;text-align:center}
+.cta .t{color:var(--ink);font-weight:700;font-size:18px;margin-bottom:8px}
+.cta .s{font-size:14.5px;color:var(--muted);margin-bottom:18px}
+.b1{display:inline-block;background:var(--green);color:#0B0D12;padding:15px 30px;border-radius:12px;
+    font-weight:700;text-decoration:none;font-size:15.5px}
 .b1:hover{background:var(--green-l)}
-.apunte{font-size:13px;color:var(--faint)}
-footer{border-top:1px solid var(--border);padding:30px 6%;text-align:center;color:var(--faint);font-size:13px}
+
+details{border-top:1px solid var(--border);padding:18px 0;margin-top:10px}
+summary{cursor:pointer;color:var(--muted);font-size:14.5px;font-weight:500;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;color:var(--green)}
+details[open] summary::after{content:"−"}
+details p{font-size:14.5px;margin-top:12px}
+details strong{color:var(--ink)}
+.aviso{font-size:12.5px;color:var(--faint);text-align:center;margin:26px 0 50px}
+footer{border-top:1px solid var(--border);padding:28px 22px;text-align:center;color:var(--faint);font-size:13px}
 footer a{color:var(--muted);text-decoration:none;margin:0 8px}
 </style>
 </head>
@@ -57,7 +88,7 @@ footer a{color:var(--muted);text-decoration:none;margin:0 8px}
 
 <nav>
   <a href="/" class="logo">
-    <span class="mark"><svg viewBox="0 0 24 24" fill="currentColor" style="width:17px;height:17px"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12z"/></svg></span>
+    <span class="mark"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12z"/></svg></span>
     <span>Signal<b>Replicator</b></span>
   </a>
   <a href="/" class="volver">Volver</a>
@@ -65,78 +96,71 @@ footer a{color:var(--muted);text-decoration:none;margin:0 8px}
 
 <div class="wrap">
 
-  <h1>¿Cuánto te cuesta <span class="g">entrar tarde</span> a una señal?</h1>
-  <p class="lead">El canal publica un precio. Tú entras al que hay cuando llegas al móvil.
-     Esa diferencia se paga en cada operación, y casi nadie la suma. Aquí la sumas.</p>
+  <h1>Lo que te cuesta <span class="g">llegar tarde</span></h1>
+  <p class="lead">Pon la hora a la que publicó tu canal. Te decimos el precio real que había — y el que había un minuto después.</p>
 
-  <div class="caja">
-    <label for="inst">Instrumento</label>
-    <select id="inst">
-      <option value="100" data-dec="2">Oro — XAUUSD (100 oz por lote)</option>
-      <option value="100000" data-dec="5">Divisas — EURUSD, GBPUSD… (100.000 por lote)</option>
-      <option value="1000" data-dec="3">Yen — USDJPY (100.000, cotiza a 3 decimales)</option>
-      <option value="1" data-dec="1">Índices — US30, NAS100 (1 por punto)</option>
-    </select>
+  <div class="marcador">
+    <div class="euros" id="mes">—</div>
+    <div class="al-mes" id="pie">al mes</div>
+    <div class="linea"></div>
+    <div class="por-op" id="porop"></div>
+  </div>
 
-    <div class="fila">
-      <div>
-        <label for="p1">Precio de la señal</label>
-        <input id="p1" type="number" step="any" inputmode="decimal" value="4369.90">
-      </div>
-      <div>
-        <label for="p2">Precio al que entraste</label>
-        <input id="p2" type="number" step="any" inputmode="decimal" value="4371.40">
-      </div>
-    </div>
-
-    <div class="fila">
-      <div>
-        <label for="lotes">Lotes</label>
-        <input id="lotes" type="number" step="any" inputmode="decimal" value="0.10">
-      </div>
-      <div>
-        <label for="ops">Operaciones al mes</label>
-        <input id="ops" type="number" step="1" inputmode="numeric" value="40">
-      </div>
+  <div class="grupo">
+    <div class="titulo">¿Qué operas?</div>
+    <div class="opciones" id="inst">
+      <div class="op on" data-s="XAUUSD" data-c="100"    data-d="2" data-u="$"><span class="emo">🥇</span><span class="nom">Oro</span></div>
+      <div class="op"    data-s="EURUSD" data-c="100000" data-d="5" data-u=""><span class="emo">💱</span><span class="nom">EUR/USD</span></div>
+      <div class="op"    data-s="US30"   data-c="1"      data-d="1" data-u="pts"><span class="emo">📈</span><span class="nom">US30</span></div>
     </div>
   </div>
 
-  <div class="resultado">
-    <div class="cifra" id="porop">—</div>
-    <div class="pie-cifra">en esa operación</div>
-    <div class="sep"></div>
-    <div class="cifra mes" id="pormes">—</div>
-    <div class="pie-cifra" id="piemes">al mes</div>
-    <div class="sep"></div>
-    <p class="explica" id="explica"></p>
+  <div class="grupo">
+    <div class="titulo">¿A qué hora publicó tu canal?</div>
+    <input type="datetime-local" id="hora">
+    <div class="extremos"><span id="rango">cargando precios…</span></div>
   </div>
 
-  <h2>De dónde sale el número</h2>
-  <p>Es una resta, no una estimación: <strong>diferencia de precio × tamaño del contrato ×
-     lotes</strong>. Nada más. Puedes comprobarlo en el historial de tu bróker con
-     cualquier operación que hayas hecho.</p>
-  <p>No cuenta el spread ni las comisiones, que los pagas igual entres cuando entres. Solo
-     cuenta lo que te cuesta la diferencia entre el precio que publicó el canal y el
-     precio al que entraste tú.</p>
+  <div class="grupo">
+    <div class="titulo">¿De cuánto son tus operaciones? <span class="valor" id="vlote"></span></div>
+    <input type="range" id="lote" min="1" max="100" step="1" value="10">
+    <div class="extremos"><span>0,01 lotes</span><span>1 lote</span></div>
+  </div>
 
-  <h2>Por qué pasa</h2>
-  <p>No es que la gente sea lenta. Es que el mensaje llega mientras trabajas, o conduces,
-     o duermes. Y cuando lo ves y abres la plataforma, el precio ya no es el mismo — sobre
-     todo en oro, que se mueve varios dólares en segundos.</p>
-  <p>Por eso la mayoría de los miembros de un canal acaban entrando a peor precio que el
-     publicado, o directamente no entran.</p>
+  <div class="grupo">
+    <div class="titulo">¿Cuántas haces al mes? <span class="valor" id="vops"></span></div>
+    <input type="range" id="ops" min="5" max="150" step="5" value="40">
+    <div class="extremos"><span>5</span><span>150</span></div>
+  </div>
 
   <div class="cta">
-    <p style="color:var(--ink);font-weight:600;font-size:17px;margin-bottom:6px">
-      Eso es exactamente lo que quitamos</p>
-    <p class="apunte" style="margin-bottom:4px">La señal se coloca sola en tu cuenta en cuanto
-      el canal la publica, con tu bróker y tu riesgo. Tú no tocas nada.</p>
+    <div class="t">Eso es exactamente lo que quitamos</div>
+    <div class="s">La señal se coloca sola en tu cuenta en cuanto el canal la publica,
+      con tu bróker y tu riesgo. Tú no tocas nada.</div>
     <a href="/" class="b1">Ver cómo funciona</a>
   </div>
 
-  <p class="apunte" style="margin-bottom:40px">Esta calculadora mide un coste, no una
-    ganancia. No prometemos ningún resultado: lo que rinda una señal depende del canal que
-    elijas, de tu bróker y del mercado.</p>
+  <details>
+    <summary>¿De dónde sale este número?</summary>
+    <p>Cogemos el precio real que había a la hora que pones y el que había un minuto
+      después. Esa diferencia es la que pagas por tardar en entrar.</p>
+    <p>Luego es una resta: <strong>diferencia de precio × tamaño del contrato ×
+      lotes</strong>. Un lote de oro son 100 onzas, uno de divisas 100.000 unidades y en
+      índices se paga un dólar por punto.</p>
+    <p>No cuenta el spread ni las comisiones, que los pagas igual entres cuando entres.
+      Solo cuenta la diferencia entre el precio que publicó el canal y el precio al que
+      entraste tú. Puedes comprobarlo con cualquier operación de tu historial.</p>
+  </details>
+
+  <details>
+    <summary>¿Por qué me desvío del precio?</summary>
+    <p>No es que vayas lento. Es que el mensaje llega mientras trabajas, o conduces, o
+      duermes. Cuando lo ves y abres la plataforma, el precio ya no es el mismo — y el oro
+      se mueve varios dólares en segundos.</p>
+  </details>
+
+  <p class="aviso">Esto mide un coste, no una ganancia. No prometemos ningún resultado: lo
+    que rinda una señal depende del canal, de tu bróker y del mercado.</p>
 
 </div>
 
@@ -152,29 +176,85 @@ footer a{color:var(--muted);text-decoration:none;margin:0 8px}
 
 <script>
 (function(){
-  var inst=document.getElementById('inst'), p1=document.getElementById('p1'),
-      p2=document.getElementById('p2'), lotes=document.getElementById('lotes'),
-      ops=document.getElementById('ops');
-  function eur(n){ return n.toLocaleString('es-ES',{style:'currency',currency:'USD',maximumFractionDigits:2}); }
-  function calcula(){
-    var contrato=parseFloat(inst.value)||1;
-    var a=parseFloat(p1.value), b=parseFloat(p2.value);
-    var l=parseFloat(lotes.value)||0, n=parseInt(ops.value)||0;
-    if(isNaN(a)||isNaN(b)){ return; }
-    var dif=Math.abs(b-a);
-    var coste=dif*contrato*l;
-    var mes=coste*n;
-    document.getElementById('porop').textContent = '-'+eur(coste);
-    document.getElementById('pormes').textContent = '-'+eur(mes);
-    document.getElementById('piemes').textContent = 'al mes, con '+n+' operaciones';
-    var dec=parseInt(inst.selectedOptions[0].dataset.dec)||2;
-    document.getElementById('explica').innerHTML =
-      'Entraste <strong>'+dif.toFixed(dec)+'</strong> de diferencia sobre el precio de la señal. '+
-      'Con '+l+' lotes eso son <strong>'+eur(coste)+'</strong> en esa operación. '+
-      'Repetido '+n+' veces al mes, <strong>'+eur(mes)+'</strong>.';
+  var API='https://app.signalreplicator.com/api/precio';
+  var inst=document.getElementById('inst'), hora=document.getElementById('hora'),
+      lote=document.getElementById('lote'), ops=document.getElementById('ops');
+  var sel=inst.querySelector('.op.on'), ultima=null, pidiendo=null;
+
+  function dinero(n){
+    var dec = n<100 ? 2 : 0;
+    return n.toLocaleString('es-ES',{minimumFractionDigits:dec,maximumFractionDigits:dec})+' $';
   }
-  [inst,p1,p2,lotes,ops].forEach(function(e){ e.addEventListener('input',calcula); e.addEventListener('change',calcula); });
-  calcula();
+  function dosCifras(n){ return (n<10?'0':'')+n; }
+  function aInput(ts){
+    var d=new Date(ts*1000);
+    return d.getFullYear()+'-'+dosCifras(d.getMonth()+1)+'-'+dosCifras(d.getDate())
+           +'T'+dosCifras(d.getHours())+':'+dosCifras(d.getMinutes());
+  }
+  function pintaBarra(el){ el.style.setProperty('--pct', (el.value-el.min)/(el.max-el.min)*100+'%'); }
+
+  function pedir(){
+    var ts = hora.value ? Math.floor(new Date(hora.value).getTime()/1000) : 0;
+    var url = API+'?simbolo='+sel.dataset.s+(ts?('&ts='+ts):'');
+    if(pidiendo) pidiendo.abort();
+    pidiendo = new AbortController();
+    document.getElementById('porop').textContent='Buscando el precio de ese momento…';
+    fetch(url,{signal:pidiendo.signal}).then(function(r){
+      if(!r.ok) throw new Error(r.status); return r.json();
+    }).then(function(d){
+      ultima=d;
+      hora.min=aInput(d.desde); hora.max=aInput(d.hasta);
+      document.getElementById('rango').textContent =
+        'tenemos precios del '+new Date(d.desde*1000).toLocaleDateString('es-ES',{day:'numeric',month:'short'})
+        +' al '+new Date(d.hasta*1000).toLocaleDateString('es-ES',{day:'numeric',month:'short'});
+      if(!hora.value) hora.value=aInput(d.momento);
+      calcula();
+    }).catch(function(e){
+      if(e.name==='AbortError') return;
+      ultima=null;
+      document.getElementById('mes').textContent='—';
+      document.getElementById('porop').textContent =
+        'No tenemos el precio de ese momento. Solo guardamos los últimos días de mercado.';
+    });
+  }
+
+  function calcula(){
+    var lotes=parseInt(lote.value)/100, n=parseInt(ops.value);
+    document.getElementById('vlote').textContent=lotes.toFixed(2).replace('.',',')+' lotes';
+    document.getElementById('vops').textContent=n;
+    [lote,ops].forEach(pintaBarra);
+    if(!ultima) return;
+
+    var c=parseFloat(sel.dataset.c), dec=parseInt(sel.dataset.d);
+    var mov=Math.abs(ultima.movimiento);
+    var porOp=mov*c*lotes, mes=porOp*n;
+
+    document.getElementById('mes').textContent = mes>0 ? '−'+dinero(mes) : dinero(0);
+    document.getElementById('pie').textContent = 'al mes, con '+n+' operaciones así';
+
+    var h=new Date(ultima.momento*1000).toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
+    var nom=sel.querySelector('.nom').textContent;
+    if(mov===0){
+      document.getElementById('porop').innerHTML =
+        'A las <b>'+h+'</b> el '+nom+' no se movió en todo el minuto siguiente. '+
+        'Prueba otra hora: en las horas fuertes se mueve mucho más.';
+    } else {
+      document.getElementById('porop').innerHTML =
+        'A las <b>'+h+'</b> el '+nom+' estaba a <b>'+ultima.precio.toFixed(dec)+'</b>. '+
+        'Un minuto después, a <b>'+ultima.precio_despues.toFixed(dec)+'</b>. '+
+        'Con '+lotes.toFixed(2).replace('.',',')+' lotes, tardar ese minuto te cuesta <b>'+dinero(porOp)+'</b>.';
+    }
+  }
+
+  inst.querySelectorAll('.op').forEach(function(o){
+    o.addEventListener('click',function(){
+      inst.querySelectorAll('.op').forEach(function(x){x.classList.remove('on');});
+      o.classList.add('on'); sel=o; pedir();
+    });
+  });
+  hora.addEventListener('change',pedir);
+  [lote,ops].forEach(function(e){ e.addEventListener('input',calcula); });
+  pedir();
 })();
 </script>
 </body>
