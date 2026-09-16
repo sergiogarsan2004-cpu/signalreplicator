@@ -263,19 +263,13 @@ footer a{color:var(--muted);text-decoration:none;margin:0 8px}
   pedir();
 
   // ── Modo incrustado ──────────────────────────────────────────────
-  // El artículo la mete en un iframe. Un alto fijo siempre se queda corto en
-  // algún móvil y entonces los deslizadores quedan fuera y no se pueden tocar:
-  // la herramienta parece rota. Así que se mide sola y se lo dice al padre
-  // cada vez que cambia de tamaño.
+  // Con ?embed=1 se esconde la barra de navegación: dentro de un artículo
+  // ocupa sitio y su «Volver» metería la web dentro de sí misma.
+  // El alto NO se manda desde aquí: lo mide el artículo, que es del mismo
+  // origen. Avisar desde dentro fallaba porque el primer aviso salía antes de
+  // recibir el precio y el observador ya no se disparaba otra vez.
   if (new URLSearchParams(location.search).get('embed') === '1') {
     document.body.classList.add('embed');
-    var avisar = function(){
-      var alto = Math.ceil(document.documentElement.getBoundingClientRect().height);
-      parent.postMessage({ calculadoraAlto: alto }, location.origin);
-    };
-    avisar();
-    if (window.ResizeObserver) new ResizeObserver(avisar).observe(document.body);
-    window.addEventListener('load', avisar);
   }
 })();
 </script>

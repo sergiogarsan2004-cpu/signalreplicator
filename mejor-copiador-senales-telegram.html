@@ -231,18 +231,41 @@ objetivos 4370 y 4360</div>
 </footer>
 
 <script>
-// La calculadora va en un iframe y se mide sola: avisa de su alto y aquí se
-// ajusta el marco. Un alto fijo se quedaba corto y escondía los controles.
+// Ajustar el alto del marco de la calculadora.
+//
+// Lo hace el artículo y no la calculadora: están en el mismo origen, así que
+// desde aquí se puede medir directamente. Al revés no funcionaba — la
+// calculadora avisaba de su alto nada más arrancar, antes de recibir el precio
+// del servidor, y su observador ya no se volvía a disparar. El marco se
+// quedaba en el alto de CSS, cortaba por «¿A qué hora publicó tu canal?» y los
+// deslizadores quedaban fuera: la herramienta parecía rota.
 (function(){
   var marco = document.getElementById('calc');
   if (!marco) return;
-  window.addEventListener('message', function(e){
-    if (e.origin !== location.origin) return;              // sólo de nuestra web
-    var alto = e.data && e.data.calculadoraAlto;
-    if (typeof alto === 'number' && alto > 200 && alto < 4000) {
-      marco.style.height = alto + 'px';
+  function ajustar(){
+    try {
+      var doc = marco.contentDocument;
+      if (!doc || !doc.documentElement) return;
+      var alto = Math.ceil(doc.documentElement.getBoundingClientRect().height);
+      if (alto > 200 && alto < 4000 && Math.abs(alto - marco.offsetHeight) > 2) {
+        marco.style.height = alto + 'px';
+      }
+    } catch (e) { /* si algún día va en otro origen, se queda el alto de CSS */ }
+  }
+  marco.addEventListener('load', function(){
+    ajustar();
+    // La calculadora crece cuando llega el precio y cuando el visitante mueve
+    // los deslizadores, así que hay que seguirla, no medirla una vez.
+    if (window.ResizeObserver) {
+      try { new ResizeObserver(ajustar).observe(marco.contentDocument.documentElement); }
+      catch (e) {}
     }
   });
+  // Red de seguridad por si el observador no está disponible.
+  var veces = 0, reloj = setInterval(function(){
+    ajustar();
+    if (++veces > 40) clearInterval(reloj);
+  }, 250);
 })();
 </script>
 
