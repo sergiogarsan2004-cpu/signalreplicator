@@ -63,9 +63,11 @@ a:hover{text-decoration:underline}
 .herramienta .cabe{padding:14px 18px;border-bottom:1px solid var(--border);background:#fff}
 .herramienta .cabe b{display:block;color:var(--ink);font-size:15px}
 .herramienta .cabe span{font-size:13.5px;color:var(--muted)}
-/* Alto de arranque; la propia calculadora lo corrige al cargar. Sin esto,
-   un alto fijo dejaba los deslizadores fuera del marco y no se podían tocar. */
-.herramienta iframe{display:block;width:100%;height:700px;border:0;background:#0b0d12;transition:height .15s}
+/* Alto de arranque; el guion de abajo lo corrige en cuanto carga.
+   SIN «transition» a propósito: con ella el alto no llegaba nunca a su destino
+   — el reloj que reajusta el marco la reiniciaba cada 250 ms, y el marco se
+   quedaba clavado en estos 700px con los deslizadores fuera. */
+.herramienta iframe{display:block;width:100%;height:700px;border:0;background:#0b0d12}
 .herramienta .pie{padding:10px 18px;font-size:13px;color:var(--muted);border-top:1px solid var(--border);background:#fff}
 
 footer{border-top:1px solid var(--border);padding:28px 6%;text-align:center;color:var(--faint);font-size:13px}
