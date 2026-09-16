@@ -25,6 +25,12 @@ body{background:var(--bg);color:var(--body);font-family:'Inter',-apple-system,sy
      line-height:1.65;-webkit-font-smoothing:antialiased}
 .wrap{max-width:640px;margin:0 auto;padding:0 22px}
 nav{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+/* Incrustada dentro de un artículo (?embed=1): sobra su propia barra —ocupa
+   sitio y su «Volver» metería la web dentro de sí misma— y sobra el margen
+   inferior, porque la altura la fija el artículo. */
+body.embed nav{display:none}
+body.embed .wrap{padding-top:26px}
+body.embed footer,body.embed .pie-legal{display:none}
 .logo{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;color:var(--ink);text-decoration:none}
 .logo .mark{width:28px;height:28px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#0B0D12}
 .logo b{color:var(--green-l)}
@@ -255,6 +261,22 @@ footer a{color:var(--muted);text-decoration:none;margin:0 8px}
   hora.addEventListener('change',pedir);
   [lote,ops].forEach(function(e){ e.addEventListener('input',calcula); });
   pedir();
+
+  // ── Modo incrustado ──────────────────────────────────────────────
+  // El artículo la mete en un iframe. Un alto fijo siempre se queda corto en
+  // algún móvil y entonces los deslizadores quedan fuera y no se pueden tocar:
+  // la herramienta parece rota. Así que se mide sola y se lo dice al padre
+  // cada vez que cambia de tamaño.
+  if (new URLSearchParams(location.search).get('embed') === '1') {
+    document.body.classList.add('embed');
+    var avisar = function(){
+      var alto = Math.ceil(document.documentElement.getBoundingClientRect().height);
+      parent.postMessage({ calculadoraAlto: alto }, location.origin);
+    };
+    avisar();
+    if (window.ResizeObserver) new ResizeObserver(avisar).observe(document.body);
+    window.addEventListener('load', avisar);
+  }
 })();
 </script>
 </body>
