@@ -48,11 +48,12 @@
     "Trading automatizado · Sin código · Sin esfuerzo": "Automated trading · No code · No effort",
     "Tu grupo de Telegram.": "Your Telegram group.", "Tu broker.": "Your broker.",
     "Automático.": "Automatic.",
-    "SignalReplicator lee las señales de tu grupo y las ejecuta en MetaTrader 5. Sin intervención humana. La hora de cada señal y de cada ejecución queda registrada en tu panel.":
-      "SignalReplicator reads the signals in your group and places them on MetaTrader 5. No human in the middle. The time of every signal and every execution is recorded in your panel.",
+    "SignalReplicator lee las señales de tu grupo y las ejecuta en MetaTrader 4 y 5. Sin intervención humana. La hora de cada señal y de cada ejecución queda registrada en tu panel.":
+      "SignalReplicator reads the signals in your group and places them on MetaTrader 4 and 5. No human in the middle. The time of every signal and every execution is recorded in your panel.",
     "Probar el Cloud gratis": "Try the Cloud free", "Versión de escritorio": "Desktop version",
     "✓ 7 días gratis · cancela cuando quieras": "✓ 7 days free · cancel whenever you want",
     "Compatible con": "Works with", "Telegram": "Telegram", "cualquier bróker": "any broker",
+    "MetaTrader 4 y 5": "MetaTrader 4 and 5",
     "Panel de SignalReplicator": "SignalReplicator panel", "Conectado": "Connected",
     "Operaciones hoy": "Trades today", "Broker": "Broker", "Actividad": "Activity",
     "BUY XAUUSD · ejecutada": "BUY XAUUSD · executed",
