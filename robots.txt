@@ -1,3 +1,7 @@
 User-agent: *
 Allow: /
+
+# Jekyll convierte el README.md del repositorio en /README.html. No es una
+# página del sitio: repite el contenido de la portada y competiría con ella.
+Disallow: /README.html
 Sitemap: https://signalreplicator.com/sitemap.xml
