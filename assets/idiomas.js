@@ -127,8 +127,10 @@
       "If Windows SmartScreen appears: More info → Run anyway",
     "La orden se abre con el lotaje que configuraste. Así de simple.":
       "The order opens with the lot size you set. That simple.",
-    "Símbolo, dirección, entrada, SL y TP — extraídos sin errores.":
-      "Symbol, direction, entry, SL and TP — extracted without errors.",
+    "Símbolo, dirección, entrada, SL y objetivos. Si algo no se entiende, no se opera: queda escrito en tu panel.":
+      "Symbol, direction, entry, SL and targets. If something isn't clear, nothing is traded: it's logged in your dashboard.",
+    "Lo leemos. Lo validamos. Lo registramos.":
+      "We read it. We validate it. We log it.",
     "Todo se empaqueta en un archivo que tu MT5 lee al instante.":
       "It is all packed into a file your MT5 reads instantly.",
     "La señal aparece en tu grupo y la detectamos al instante.":
