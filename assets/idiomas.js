@@ -38,6 +38,7 @@
     "Cómo copiar señales": "How to copy signals",
     "Comparativa de copiadores": "Copier comparison",
     "Para dueños de canal": "For channel owners",
+    "Descargar": "Download",
     "Privacidad": "Privacy",
     "Reembolso": "Refunds",
     "© 2026 SignalReplicator · Sergio García Santos · El trading de CFDs conlleva riesgo de pérdida. Las señales son informativas y no constituyen asesoramiento financiero.": "© 2026 SignalReplicator · Sergio García Santos · CFD trading carries a risk of loss. Signals are informational and do not constitute financial advice.",
