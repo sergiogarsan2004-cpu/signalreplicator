@@ -102,6 +102,12 @@ jobs:
               const ok = espera.test(h1);
               console.log(lang, ok ? 'OK' : 'MAL', JSON.stringify(h1.slice(0, 60)));
               if (!ok) mal = 1;
+              // Los botones del Cloud van al REGISTRO del panel (7 días sin tarjeta), no al pago.
+              const [aPago, aRegistro] = await p.evaluate(() => [
+                document.querySelectorAll('a[href*="whop.com/checkout/plan_OX65dRFHTHYdE"]').length,
+                document.querySelectorAll('a[href*="app.signalreplicator.com/auth?modo=registro"]').length]);
+              console.log(lang, 'botones Cloud: al pago', aPago, '· al registro', aRegistro);
+              if (aPago > 0 || aRegistro === 0) { console.log('::error::Los botones del Cloud deben ir al registro del panel, no al pago de Whop.'); mal = 1; }
             }
             await b.close();
             process.exit(mal);

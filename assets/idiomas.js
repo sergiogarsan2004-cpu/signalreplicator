@@ -348,7 +348,23 @@
     }
   }
 
+  // Los botones del Cloud («Empezar gratis», «Probar el Cloud gratis», «Crear mi
+  // cuenta»…) llevaban al PAGO de Whop, que pide tarjeta, y luego había que registrarse
+  // igual en el panel. Registrarse en el panel ya da los 7 días gratis sin tarjeta
+  // (TRIAL_DIAS en cloud/api/app.py), así que van ahí, en la misma pestaña. Sergio,
+  // 16 oct: «lo que hay que hacer, fácil la web para empezar». Se corrige también aquí
+  // por si se reexporta el paquete de Base44 con el enlace viejo.
+  var REGISTRO = "https://app.signalreplicator.com/auth?modo=registro";
+  function botonesAlRegistro() {
+    var as = document.querySelectorAll('a[href*="whop.com/checkout/plan_OX65dRFHTHYdE"], a[href="' + REGISTRO + '"]');
+    for (var i = 0; i < as.length; i++) {
+      if (as[i].getAttribute("href") !== REGISTRO) as[i].setAttribute("href", REGISTRO);
+      if (as[i].getAttribute("target")) { as[i].removeAttribute("target"); as[i].removeAttribute("rel"); }
+    }
+  }
+
   function pintar() {
+    botonesAlRegistro();
     aplicar(document.body);
     enlazarIngles();
     document.documentElement.lang = actual;
