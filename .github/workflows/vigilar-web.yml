@@ -109,6 +109,18 @@ jobs:
               console.log(lang, 'botones Cloud: al pago', aPago, '· al registro', aRegistro);
               if (aPago > 0 || aRegistro === 0) { console.log('::error::Los botones del Cloud deben ir al registro del panel, no al pago de Whop.'); mal = 1; }
             }
+            // En el MÓVIL nada puede ensanchar la página (16 oct: el pie la llevaba a 492 px y
+            // el teléfono la encogía). Si algo se sale, el navegador agranda innerWidth.
+            for (const url of ['https://signalreplicator.com/', 'https://app.signalreplicator.com/auth?modo=registro']) {
+              const m = await b.newPage();
+              await m.emulate({ viewport: { width: 360, height: 780, deviceScaleFactor: 2, isMobile: true, hasTouch: true },
+                                userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1' });
+              await m.goto(url + (url.includes('?') ? '&' : '?') + 'vigia=' + Date.now(), { waitUntil: 'networkidle2' });
+              await new Promise(r => setTimeout(r, 1500));
+              const ancho = await m.evaluate(() => innerWidth);
+              console.log('móvil 360px', url, ancho === 360 ? 'OK' : 'MAL ancho=' + ancho);
+              if (ancho !== 360) { console.log('::error::' + url + ' es más ancha que un móvil de 360 px (' + ancho + ' px): algo se sale de la pantalla.'); mal = 1; }
+            }
             await b.close();
             process.exit(mal);
           })();
