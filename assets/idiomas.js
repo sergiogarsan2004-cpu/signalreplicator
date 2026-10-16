@@ -272,7 +272,13 @@
     var q = new URLSearchParams(location.search).get("lang");
     if (q && (q === "es" || IDIOMAS[q])) return q;
     try { var g = localStorage.getItem("sr_lang"); if (g && (g === "es" || IDIOMAS[g])) return g; } catch (e) {}
-    return "es";
+    // Sin elección previa: el idioma del NAVEGADOR. Antes era siempre español, y un
+    // dueño de canal en inglés (Rio Traders, 16 oct) lo vio en español y tuvo que
+    // cambiarlo a mano. A los rastreadores se les deja en español: la portada es la
+    // versión española para Google (hreflang), y la inglesa es /en.html.
+    if (/bot|crawl|spider|slurp|facebookexternalhit|whatsapp|telegram|preview/i.test(navigator.userAgent || "")) return "es";
+    var nav = (navigator.languages && navigator.languages[0]) || navigator.language || "es";
+    return /^es\b/i.test(nav) ? "es" : "en";
   }
 
   var actual = idiomaElegido();
@@ -338,6 +344,10 @@
     enlazarIngles();
     document.documentElement.lang = actual;
     marcarBoton();
+    // La cabecera de index.html tapa la página (clase sr-trad) mientras no está en el
+    // idioma bueno, para que el visitante inglés no vea primero el español. Se
+    // destapa en cuanto React ha montado (#top existe) y ya se ha traducido.
+    if (document.getElementById("top")) document.documentElement.classList.remove("sr-trad");
   }
 
   // El botón del idioma activo va en verde; el otro, apagado. Si no se marca,
