@@ -46,8 +46,8 @@
       "Not to us. You type your credentials straight into MetaApi, the service that connects to your broker, and they never pass through our servers at any point. The MetaApi account is ours and we pay for it, so you do not have to sign up there or give a card. And those credentials are for trading, not for withdrawing: brokers keep the withdrawal password separate.",
     "El parser reconoce los formatos habituales de los canales de señales: símbolo, dirección, entrada, stop loss y varios take profits, escritos de muchas maneras distintas y en cinco idiomas. Si un canal escribe de una forma muy poco convencional, escríbenos y lo miramos: añadir un formato nuevo es trabajo nuestro, no tuyo.":
       "The parser recognises the formats signal channels normally use: symbol, direction, entry, stop loss and several take profits, written in many different ways and in five languages. If a channel writes in a very unusual way, write to us and we will look at it: adding a new format is our job, not yours.",
-    "Al suscribirte introduces tu tarjeta y empiezas 7 días gratis. No se te cobra nada durante esos 7 días. Si al terminar no has cancelado, se te cobran 35 € y a partir de ahí cada mes. Puedes cancelar cuando quieras desde tu cuenta, y sigues teniendo servicio hasta el final del periodo que ya pagaste.":
-      "When you subscribe you enter your card and start 7 days free. Nothing is charged during those 7 days. If you have not cancelled by the end, you are charged €35 and then every month. You can cancel whenever you like from your account, and you keep the service until the end of the period you already paid for.",
+    "Solo si te suscribes. La prueba de 7 días no pide tarjeta. Cuando termina, el panel te ofrece suscribirte por 35 € al mes y es ahí donde introduces el pago. Puedes cancelar cuando quieras desde tu cuenta y sigues teniendo servicio hasta el final del periodo que ya pagaste.":
+      "Only if you subscribe. The 7-day trial needs no card. When it ends, the panel offers you the subscription at €35 a month, and that is where you enter your payment. You can cancel whenever you like from your account and keep the service until the end of the period you already paid for.",
     "Con el plan Cloud no. Funciona en nuestros servidores las 24 horas: puedes apagar el portátil, cerrar la tapa o irte de viaje, y las señales se siguen copiando. Con la versión de escritorio sí, porque el programa corre en tu equipo.":
       "Not on the Cloud plan. It runs on our servers 24 hours a day: you can shut the laptop, close the lid or go away on a trip, and the signals keep being copied. On the desktop version you do, because the program runs on your machine.",
     "Lee símbolo, dirección, entrada, stop loss y varios take profits, escritos como los escribe cada canal. Si tu grupo usa un formato poco habitual, escríbenos y lo miramos: añadir un formato nuevo es trabajo nuestro, no tuyo.":
@@ -58,8 +58,8 @@
       "On the Cloud plan, yes: it executes on both MetaTrader 4 and MetaTrader 5, with any broker. The desktop version is MetaTrader 5 only. If your account is MT4, the Cloud plan is the one you need.",
     "Se conecta como cuando inicias sesión en un móvil nuevo: tu número y el código que te llega. La sesión sólo lee los canales que tú elijas. Nunca enviamos, respondemos ni publicamos nada desde tu cuenta.":
       "It connects the same way as signing in on a new phone: your number and the code you receive. The session only reads the channels you choose. We never send, reply or post anything from your account.",
-    "Sí. Introduces tu tarjeta al empezar, pero no se te cobra nada durante los 7 días. Si cancelas antes de que terminen, no pagas. Es lo que nos permite mantener la prueba completa y sin límites de uso.":
-      "Yes. You enter your card at the start, but nothing is charged during the 7 days. If you cancel before they end, you pay nothing. It is what lets us keep the trial complete and without usage limits.",
+    "No. Te registras en el panel y tienes los 7 días gratis completos, sin tarjeta y sin límites de uso. Si te convence, al terminar la prueba te suscribes desde el propio panel.":
+      "No. You sign up in the panel and get the full 7 days free, with no card and no usage limits. If you like it, you subscribe from the panel itself when the trial ends.",
     "Para leer tus canales hay que iniciar sesión en Telegram, igual que cuando entras desde un móvil nuevo: tu número y el código que te llega. Cuatro cosas que puedes comprobar tú mismo:":
       "To read your channels we have to sign in to Telegram, the same as when you sign in from a new phone: your number and the code you receive. Four things you can check yourself:",
     "SignalReplicator lee las señales de tu grupo y las ejecuta en MetaTrader 4 y 5. Sin intervención humana. La hora de cada señal y de cada ejecución queda registrada en tu panel.":
@@ -92,8 +92,8 @@
       "Runs on our servers in the European Union, 24 hours a day. Nothing to install and no need to leave your computer on.",
     "Te avisamos por Telegram cada vez que se abre o se cierra una operación, y si algo falla. Sin tener que entrar al panel.":
       "We message you on Telegram every time a trade opens or closes, and if anything fails. Without having to open the panel.",
-    "Si no has cancelado, se cobra el primer mes y sigues con el servicio. Si cancelas antes de que terminen, no pagas nada.":
-      "If you have not cancelled, the first month is charged and you carry on with the service. If you cancel before they end, you pay nothing.",
+    "El panel te avisa y te ofrece suscribirte. Si no lo haces, la copia de señales se para y no se te cobra nada. Tu cuenta y tu configuración se guardan por si vuelves.":
+      "The panel lets you know and offers you the subscription. If you do not subscribe, signal copying stops and you are not charged anything. Your account and settings are kept in case you come back.",
     "7 días gratis · cancela cuando quieras. Si prefieres tenerlo en tu equipo, más abajo tienes la versión de escritorio.":
       "7 days free · cancel whenever you like. If you would rather run it on your own machine, the desktop version is below.",
     "Antes de que pagues, esto es lo que no vas a obtener. Tan importante como lo que sí damos, y todo comprobable por ti.":
@@ -114,8 +114,8 @@
       "Executes on MT4 and MT5 with any broker. The desktop version is MetaTrader 5 only.",
     "Estas son las razones reales por las que merece la pena, y cada una se puede comprobar.":
       "These are the real reasons it is worth it, and every one of them can be checked.",
-    "€23/mes con 7 días gratis. Sin permanencia, sin letra pequeña, cancelas cuando quieras.":
-      "€23/month with 7 days free. No lock-in, no small print, cancel whenever you like.",
+    "Desde €23/mes con 7 días gratis. Sin permanencia, sin letra pequeña, cancelas cuando quieras.":
+      "From €23/month with 7 days free. No lock-in, no small print, cancel whenever you like.",
     "Compatible con cualquier broker MT5 · Escritorio en Windows · Cloud desde el navegador":
       "Works with any MT5 broker · Desktop on Windows · Cloud from your browser",
     "La versión de escritorio corre en tu ordenador con MetaTrader 5 abierto. Sólo Windows.":
@@ -264,6 +264,14 @@
     "FAQ": "FAQ",
     "Hoy": "Today",
     "Cuál elegir": "Which one to choose",
+    "Crea tu cuenta con tu correo: 7 días gratis, sin tarjeta": "Create your account with your email: 7 days free, no card",
+    "Activa la verificación en dos pasos con Google Authenticator (gratis, 1 minuto)": "Turn on two-step verification with Google Authenticator (free, 1 minute)",
+    "Conecta tu Telegram: tu número y el código que te llega. Solo lectura": "Connect your Telegram: your number and the code you receive. Read-only",
+    "Conecta tu bróker: se abre una página segura de MetaApi y escribes tu número de cuenta y tu contraseña principal": "Connect your broker: a secure MetaApi page opens and you enter your account number and main password",
+    "Elige el canal que quieres copiar y tu lote. Desde ahí, cada señal se abre sola ✓": "Pick the channel you want to copy and your lot size. From then on, every signal opens by itself ✓",
+    "Empieza en": "Start in",
+    "Crear mi cuenta gratis": "Create my free account",
+    "5 minutos.": "5 minutes.",
     "English": "Español",
   };
 
