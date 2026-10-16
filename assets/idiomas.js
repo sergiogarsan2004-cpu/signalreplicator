@@ -264,6 +264,7 @@
     "FAQ": "FAQ",
     "Hoy": "Today",
     "Cuál elegir": "Which one to choose",
+    "English": "Español",
   };
 
   var IDIOMAS = { en: EN };
@@ -271,7 +272,9 @@
 
   function idiomaElegido() {
     var q = new URLSearchParams(location.search).get("lang");
-    if (q && (q === "es" || IDIOMAS[q])) return q;
+    // ?lang= se GUARDA: antes valía solo para esa visita, y al pinchar en la portada el
+    // visitante que había entrado en inglés volvía al idioma del navegador.
+    if (q && (q === "es" || IDIOMAS[q])) { try { localStorage.setItem("sr_lang", q); } catch (e) {} return q; }
     try { var g = localStorage.getItem("sr_lang"); if (g && (g === "es" || IDIOMAS[g])) return g; } catch (e) {}
     // Sin elección previa: el idioma del NAVEGADOR. Antes era siempre español, y un
     // dueño de canal en inglés (Rio Traders, 16 oct) lo vio en español y tuvo que
@@ -328,7 +331,12 @@
     "/terminos.html": "/terms.html",
     "/privacidad.html": "/privacy.html",
     "/reembolso.html": "/refunds.html",
-    "/descargas.html": "/downloads.html"
+    "/descargas.html": "/downloads.html",
+    // Sin versión inglesa propia: el artículo que más se le parece.
+    "/mejor-copiador-senales-telegram.html": "/comparison.html",
+    "https://es.trustpilot.com/evaluate/signalreplicator.com": "https://www.trustpilot.com/evaluate/signalreplicator.com",
+    // En inglés el enlace del pie es para volver al español, no para ir al inglés.
+    "/en.html": "/?lang=es"
   };
 
   function enlazarIngles() {
