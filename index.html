@@ -80,6 +80,10 @@
        El estilo va EN LÍNEA dentro del elemento, así que la única forma de
        ganarle es !important. -->
   <style>
+    /* El pie va FUERA de #root: mientras React no monta, el esqueleto es corto y el pie
+       sale a media pantalla; al montar, salta abajo (Lighthouse: CLS 0,29). Reservando
+       la pantalla entera el pie nace ya por debajo y el salto no se ve. */
+    #root { min-height: 100vh; }
     #top [style*="opacity: 0"], #top [style*="opacity:0"] {
       opacity: 1 !important;
     }
@@ -91,7 +95,7 @@
 <link rel="alternate" hreflang="en" href="https://signalreplicator.com/en.html">
 <link rel="canonical" href="https://signalreplicator.com/">
 <link rel="alternate" hreflang="x-default" href="https://signalreplicator.com/">
-<script>!function(w,d,s,u,n,a,b){if(w[n])return;a=w[n]={q:[],t:+new Date,s:[],o:u,track:function(){a.q.push([+new Date].concat([].slice.call(arguments)))},setScope:function(){a.s=[].slice.call(arguments).filter(function(x){return typeof x==="string"});a.q.push([+new Date,"setScope"].concat(a.s))},scope:function(){var c=[].slice.call(arguments);return{track:function(){a.q.push([+new Date].concat([].slice.call(arguments)).concat([{__scope:c}]))}}}};b=d.createElement(s);b.async=1;b.src=u+"/s.js";d.getElementsByTagName(s)[0].parentNode.insertBefore(b,d.getElementsByTagName(s)[0])}(window,document,"script","https://t.whop.tw","whop");whop.setScope("biz_iqmhpJFP93GDsv");whop.track("page");</script>
+<script>/* Pixel de Whop DIFERIDO: su fingerprint.js se comia 2,5 s de CPU en movil y congelaba la pagina al abrirla (Lighthouse movil 50/100). El snippet de Whop va INTACTO dentro de cargar(); solo se ejecuta 4 s despues de que la pagina haya cargado y el navegador este libre. */(function(){var hecho=!1;function cargar(){if(hecho)return;hecho=!0;!function(w,d,s,u,n,a,b){if(w[n])return;a=w[n]={q:[],t:+new Date,s:[],o:u,track:function(){a.q.push([+new Date].concat([].slice.call(arguments)))},setScope:function(){a.s=[].slice.call(arguments).filter(function(x){return typeof x==="string"});a.q.push([+new Date,"setScope"].concat(a.s))},scope:function(){var c=[].slice.call(arguments);return{track:function(){a.q.push([+new Date].concat([].slice.call(arguments)).concat([{__scope:c}]))}}}};b=d.createElement(s);b.async=1;b.src=u+"/s.js";d.getElementsByTagName(s)[0].parentNode.insertBefore(b,d.getElementsByTagName(s)[0])}(window,document,"script","https://t.whop.tw","whop");whop.setScope("biz_iqmhpJFP93GDsv");whop.track("page");}function luego(){"requestIdleCallback"in window?requestIdleCallback(cargar,{timeout:3000}):cargar()}function tras(){setTimeout(luego,4000)}document.readyState==="complete"?tras():addEventListener("load",tras)})();</script>
 </head>
 <body>
   <!-- ═══ PRIMERA PANTALLA, SIN ESPERAR AL JAVASCRIPT ═══
