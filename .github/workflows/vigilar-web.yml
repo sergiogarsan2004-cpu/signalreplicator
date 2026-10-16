@@ -1,0 +1,100 @@
+# Vigila que la web no vuelva a ir lenta ni a salir en el idioma equivocado.
+#
+# POR QUÉ EXISTE (16 oct 2026): un dueño de canal abrió la web y dijo «Loading is very
+# slow» y «sale en otro idioma y luego cambia a inglés». Medido en móvil: 50/100. Dos
+# culpables, los dos metidos a mano sin darse cuenta del coste:
+#   · el píxel de Whop cargando al abrir la página (su fingerprint.js: 2,5 s de CPU)
+#   · la fuente Inter pedida a Google Fonts (salto del texto al cargar)
+# Y la portada arrancaba siempre en español, enseñándolo antes de traducir.
+#
+# Si un día se vuelve a pegar el snippet de Whop tal cual, se reexporta index.html
+# desde Base44 o se mete otra cosa pesada, esto falla y GitHub manda un correo.
+#
+# No publica nada ni toca la web: solo mira.
+name: Vigilar la web
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 7 * * 1"        # cada lunes a las 07:00 UTC
+  workflow_dispatch:
+
+jobs:
+  vigilar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reglas del código (lo que nos hizo ir lentos)
+        run: |
+          fallos=0
+          for f in $(grep -l "t.whop.tw" *.html); do
+            if ! grep -q "requestIdleCallback(cargar" "$f"; then
+              echo "::error file=$f::El píxel de Whop está sin diferir. Debe ir dentro de cargar() (ver index.html)."
+              fallos=1
+            fi
+          done
+          if grep -l "fonts.googleapis.com/css\|fonts.gstatic.com" *.html | grep -v "^index.html$"; then
+            echo "::error::Hay páginas pidiendo la fuente a Google Fonts. Usar /assets/fonts/inter-latin.woff2."
+            fallos=1
+          fi
+          if ! grep -q "sr-trad" index.html; then
+            echo "::error file=index.html::Falta el tapado de idioma (clase sr-trad). Se ha reexportado index.html desde Base44: volver a añadirlo."
+            fallos=1
+          fi
+          if ! grep -q "navigator.languages" assets/idiomas.js; then
+            echo "::error file=assets/idiomas.js::idiomas.js ya no elige el idioma por el navegador."
+            fallos=1
+          fi
+          exit $fallos
+
+      - name: Esperar a que GitHub Pages publique este cambio
+        if: github.event_name == 'push'
+        run: sleep 120
+
+      - name: Velocidad en móvil (Lighthouse)
+        run: |
+          fallos=0
+          for p in "" comparativa.html copiar-senales-telegram-metatrader.html; do
+            url="https://signalreplicator.com/${p}?vigia=${GITHUB_RUN_ID}"
+            npx -y lighthouse@12 "$url" --only-categories=performance --form-factor=mobile \
+              --output=json --output-path=lh.json --quiet \
+              --chrome-flags="--headless=new --no-sandbox --lang=en-US" >/dev/null 2>&1 || true
+            nota=$(node -e "try{const d=require('./lh.json');console.log(Math.round(d.categories.performance.score*100))}catch(e){console.log(0)}")
+            tbt=$(node -e "try{const d=require('./lh.json');console.log(Math.round(d.audits['total-blocking-time'].numericValue))}catch(e){console.log(99999)}")
+            echo "/${p}: ${nota}/100, bloqueo ${tbt} ms"
+            if [ "$nota" -lt 80 ] || [ "$tbt" -gt 600 ]; then
+              echo "::error::/${p} va lenta en móvil: ${nota}/100 y ${tbt} ms de bloqueo (antes del arreglo: 50/100 y 1420 ms)."
+              fallos=1
+            fi
+          done
+          exit $fallos
+
+      - name: Idioma (navegador en inglés y en español)
+        run: |
+          npm i --no-save puppeteer@23 >/dev/null 2>&1
+          cat > idioma.js <<'EOF'
+          const puppeteer = require('puppeteer');
+          (async () => {
+            const b = await puppeteer.launch({ args: ['--no-sandbox'] });
+            let mal = 0;
+            for (const [lang, espera] of [['en-US', /Your Telegram/], ['es-ES', /Tu grupo de Telegram/]]) {
+              const p = await b.newPage();
+              await p.setExtraHTTPHeaders({ 'Accept-Language': lang });
+              await p.evaluateOnNewDocument(l => {
+                Object.defineProperty(navigator, 'language', { get: () => l });
+                Object.defineProperty(navigator, 'languages', { get: () => [l] });
+              }, lang);
+              await p.goto('https://signalreplicator.com/?vigia=' + Date.now(), { waitUntil: 'networkidle2' });
+              await new Promise(r => setTimeout(r, 1500));
+              const h1 = await p.$eval('h1', e => e.innerText).catch(() => '');
+              const ok = espera.test(h1);
+              console.log(lang, ok ? 'OK' : 'MAL', JSON.stringify(h1.slice(0, 60)));
+              if (!ok) mal = 1;
+            }
+            await b.close();
+            process.exit(mal);
+          })();
+          EOF
+          node idioma.js
