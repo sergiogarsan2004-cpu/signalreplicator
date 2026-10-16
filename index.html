@@ -84,6 +84,14 @@
        sale a media pantalla; al montar, salta abajo (Lighthouse: CLS 0,29). Reservando
        la pantalla entera el pie nace ya por debajo y el salto no se ve. */
     #root { min-height: 100vh; }
+    /* MÓVIL: la fila del pie de React (Soporte · Estado · Términos · Privacidad…) iba en
+       una sola línea de ~590 px y ensanchaba TODA la portada en el teléfono (Rio Traders:
+       «not user friendly»). Que salte de línea. Y que nada pueda ensanchar la página:
+       clip, no hidden, porque hidden rompe la sección «sticky» de Cómo funciona. */
+    html, body { overflow-x: clip; }
+    footer .flex.items-center.gap-6, .flex.items-center.gap-6.text-zinc-500 {
+      flex-wrap: wrap; justify-content: center; row-gap: 10px;
+    }
     #top [style*="opacity: 0"], #top [style*="opacity:0"] {
       opacity: 1 !important;
     }
