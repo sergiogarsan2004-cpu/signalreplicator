@@ -263,6 +263,7 @@
     "/mes": "/month",
     "FAQ": "FAQ",
     "Hoy": "Today",
+    "Cuál elegir": "Which one to choose",
   };
 
   var IDIOMAS = { en: EN };
@@ -343,6 +344,9 @@
     aplicar(document.body);
     enlazarIngles();
     document.documentElement.lang = actual;
+    // El título de la pestaña también: un visitante inglés lo veía en español.
+    if (actual === "en" && /Tu grupo de Telegram/.test(document.title))
+      document.title = "SignalReplicator · Your Telegram group, your broker, automatic";
     marcarBoton();
     // La cabecera de index.html tapa la página (clase sr-trad) mientras no está en el
     // idioma bueno, para que el visitante inglés no vea primero el español. Se
