@@ -1,0 +1,30 @@
+# Vigilante EXTERNO del servidor del Cloud.
+#
+# POR QUÉ EXISTE (20 oct 2026): Hetzner bloqueó el VPS por dos facturas sin pagar (11,99 €)
+# y nadie se enteró: Uptime Kuma vive en ESE MISMO servidor, así que cuando el servidor
+# entero cae no puede avisar de nada. Esto corre en las máquinas de GitHub, fuera de Hetzner.
+#
+# Cada 10 minutos pide /salud. Si no contesta «activo», el trabajo FALLA y GitHub manda un
+# correo. Va en el repositorio de la web porque es público: aquí GitHub no cobra minutos.
+name: Vigilar el servidor
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  salud:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: ¿Responde el panel?
+        run: |
+          for intento in 1 2 3; do
+            if curl -s -m 20 https://app.signalreplicator.com/salud | grep -q activo; then
+              echo "Panel OK (intento $intento)"; exit 0
+            fi
+            sleep 20
+          done
+          echo "::error::app.signalreplicator.com no responde desde fuera. Mira primero el correo de Hetzner (impagos, bloqueos) y su consola."
+          exit 1
