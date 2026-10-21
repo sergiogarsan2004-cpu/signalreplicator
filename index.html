@@ -134,6 +134,19 @@
     <button type="button" onclick="srCambiarIdioma('en')" style="color:#a7b3ab;background:none;border:0;cursor:pointer;font:inherit;border-radius:999px;padding:4px 11px">EN</button>
   </div>
 
+  <!-- ═══ ¿DUDAS? → EL BOT DE SOPORTE ═══
+       Sergio, 21 oct: «poner algo para que si tienen dudas les explique el bot». El bot
+       (@SignalReplicatorSupport_bot, Cloudflare) contesta al momento las preguntas típicas
+       con su menú y pasa a Sergio las que no sabe. Fuera de #root, como el selector de
+       idioma, para que React no lo borre. Abajo a la IZQUIERDA: la derecha es del idioma. -->
+  <a href="https://t.me/SignalReplicatorSupport_bot" target="_blank" rel="noopener"
+     style="position:fixed;bottom:16px;left:16px;z-index:9999;display:inline-flex;align-items:center;gap:7px;
+            background:rgba(13,15,20,.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+            border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:8px 14px 8px 11px;
+            font-family:system-ui,-apple-system,sans-serif;font-size:13px;font-weight:600;color:#e8efea;text-decoration:none">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg><span>¿Dudas? Pregúntanos</span>
+  </a>
+
   <div id="root">
     <div style="max-width:760px;margin:0 auto;padding:56px 22px 40px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:#e8efea;background:#0D0F14;line-height:1.65">
       <div style="font-size:24px;font-weight:800;letter-spacing:-.02em">

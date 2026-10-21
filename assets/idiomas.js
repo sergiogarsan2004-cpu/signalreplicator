@@ -273,6 +273,7 @@
     "Crear mi cuenta gratis": "Create my free account",
     "5 minutos.": "5 minutes.",
     "English": "Español",
+    "¿Dudas? Pregúntanos": "Questions? Ask us",
   };
 
   var IDIOMAS = { en: EN };
