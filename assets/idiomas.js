@@ -381,8 +381,8 @@
     enlazarIngles();
     document.documentElement.lang = actual;
     // El título de la pestaña también: un visitante inglés lo veía en español.
-    if (actual === "en" && /Tu grupo de Telegram/.test(document.title))
-      document.title = "SignalReplicator · Your Telegram group, your broker, automatic";
+    if (actual === "en" && /Copiador de señales|Tu grupo de Telegram/.test(document.title))
+      document.title = "Telegram Signal Copier for MT4 & MT5 · SignalReplicator";
     marcarBoton();
     // La cabecera de index.html tapa la página (clase sr-trad) mientras no está en el
     // idioma bueno, para que el visitante inglés no vea primero el español. Se
