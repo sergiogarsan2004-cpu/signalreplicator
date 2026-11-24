@@ -380,7 +380,7 @@
     document.documentElement.lang = actual;
     // El título de la pestaña también: un visitante inglés lo veía en español.
     if (actual === "en" && /Copiador de señales|Tu grupo de Telegram/.test(document.title))
-      document.title = "Telegram Signal Copier for MT4 & MT5 · SignalReplicator";
+      document.title = "SignalReplicator — Telegram Signal Copier for MT4 & MT5";
     // Y la descripción: Google enseñaba /?lang=en con el texto en español debajo
     // del título (visto el 24 nov 2026). Solo la de la portada.
     var desc = document.querySelector('meta[name="description"]');
