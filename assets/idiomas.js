@@ -381,6 +381,11 @@
     // El título de la pestaña también: un visitante inglés lo veía en español.
     if (actual === "en" && /Copiador de señales|Tu grupo de Telegram/.test(document.title))
       document.title = "Telegram Signal Copier for MT4 & MT5 · SignalReplicator";
+    // Y la descripción: Google enseñaba /?lang=en con el texto en español debajo
+    // del título (visto el 24 nov 2026). Solo la de la portada.
+    var desc = document.querySelector('meta[name="description"]');
+    if (actual === "en" && desc && /^Copiador de señales de Telegram a MetaTrader/.test(desc.getAttribute("content") || ""))
+      desc.setAttribute("content", "Telegram signal copier for MetaTrader 4 and 5: it reads the signals from your channel and places them on your account by itself. No coding. 7-day free trial, cancel anytime.");
     marcarBoton();
     // La cabecera de index.html tapa la página (clase sr-trad) mientras no está en el
     // idioma bueno, para que el visitante inglés no vea primero el español. Se
